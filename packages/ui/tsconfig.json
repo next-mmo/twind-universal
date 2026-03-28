@@ -8,5 +8,13 @@
             "@/hooks/*": ["reusables/hooks/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "reusables/**/*.ts", "reusables/**/*.tsx", "uniwind-types.d.ts"]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "reusables/**/*.ts",
+        "reusables/**/*.tsx",
+        "uniwind-types.d.ts",
+        "rn-uniwind-classname.d.ts",
+        "src/uniwind-components.d.ts"
+    ]
 }

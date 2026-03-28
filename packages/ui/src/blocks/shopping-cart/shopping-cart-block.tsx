@@ -50,7 +50,7 @@ function ShoppingCartBlock({
     const [items, setItems] = useState(initialItems)
 
     const removeItem = (id: string) => {
-        setItems((prev) => prev.filter((item) => item.id !== id))
+        setItems(prev => prev.filter(item => item.id !== id))
     }
 
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -60,9 +60,7 @@ function ShoppingCartBlock({
             <View className={cn('flex-col py-32', className)}>
                 <View className="w-full max-w-lg self-center px-4">
                     <View className="items-center gap-4">
-                        <UIText className="text-center text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-                            {emptyTitle}
-                        </UIText>
+                        <UIText className="text-center text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">{emptyTitle}</UIText>
                         <UIText className="text-center leading-7 text-zinc-600 dark:text-zinc-300">{emptyDescription}</UIText>
                         <Button size="lg" onPress={onContinueShopping}>
                             <UIText>{continueShoppingLabel}</UIText>
@@ -79,18 +77,10 @@ function ShoppingCartBlock({
                 <UIText className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">{title}</UIText>
 
                 <View className="gap-4">
-                    {items.map((item) => (
-                        <View
-                            key={item.id}
-                            className="flex-row items-center gap-4 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800"
-                        >
+                    {items.map(item => (
+                        <View key={item.id} className="flex-row items-center gap-4 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
                             <View className="h-20 w-20 shrink-0 overflow-hidden rounded-md">
-                                <Image
-                                    accessibilityLabel={item.name}
-                                    className="size-full"
-                                    resizeMode="cover"
-                                    source={{ uri: item.image }}
-                                />
+                                <Image accessibilityLabel={item.name} className="size-full" resizeMode="cover" source={{ uri: item.image }} />
                             </View>
 
                             <View className="min-w-0 flex-1 gap-1">
@@ -99,9 +89,7 @@ function ShoppingCartBlock({
                             </View>
 
                             <View className="items-end">
-                                <UIText className="font-semibold text-zinc-950 dark:text-zinc-50">
-                                    {formatUsd(item.price * item.quantity)}
-                                </UIText>
+                                <UIText className="font-semibold text-zinc-950 dark:text-zinc-50">{formatUsd(item.price * item.quantity)}</UIText>
                             </View>
 
                             <Button

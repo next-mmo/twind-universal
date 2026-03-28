@@ -1,21 +1,33 @@
-import { View } from '../primitives'
 import { tv, type VariantProps } from 'tailwind-variants'
-import { Avatar, AvatarFallback, AvatarImage, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, UIText } from '../reusables'
+import { View } from '../primitives'
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    UIText,
+} from '../reusables'
 
 // ── Variants ──────────────────────────────────────────────────────────
 
 const profileCardVariants = tv({
-  base: '',
-  variants: {
-    size: {
-      sm: 'max-w-xs',
-      md: 'max-w-sm',
-      lg: 'max-w-md',
+    base: '',
+    variants: {
+        size: {
+            sm: 'max-w-xs',
+            md: 'max-w-sm',
+            lg: 'max-w-md',
+        },
     },
-  },
-  defaultVariants: {
-    size: 'md',
-  },
+    defaultVariants: {
+        size: 'md',
+    },
 })
 
 const profileAvatarVariants = tv({
@@ -34,9 +46,9 @@ const profileAvatarVariants = tv({
 
 // ── Types ─────────────────────────────────────────────────────────────
 
-interface StatItem {
-  label: string
-  value: string
+interface ProfileCardStatItem {
+    label: string
+    value: string
 }
 
 type ProfileCardVariants = VariantProps<typeof profileCardVariants>
@@ -48,21 +60,12 @@ interface ProfileCardProps extends ProfileCardVariants {
     name: string
     onAction?: () => void
     role?: string
-    stats?: StatItem[]
+    stats?: ProfileCardStatItem[]
 }
 
 // ── Component ─────────────────────────────────────────────────────────
 
-function ProfileCard({
-    actionLabel,
-    avatarUrl,
-    className,
-    name,
-    onAction,
-    role,
-    size,
-    stats,
-}: ProfileCardProps) {
+function ProfileCard({ actionLabel, avatarUrl, className, name, onAction, role, size, stats }: ProfileCardProps) {
     return (
         <Card className={profileCardVariants({ size, className })}>
             <CardHeader className="flex-row items-center gap-4">
@@ -100,5 +103,5 @@ function ProfileCard({
 }
 ProfileCard.displayName = 'ProfileCard'
 
+export type { ProfileCardProps, ProfileCardStatItem, ProfileCardVariants }
 export { ProfileCard, profileAvatarVariants, profileCardVariants }
-export type { ProfileCardProps, ProfileCardVariants, StatItem }

@@ -1,4 +1,5 @@
 export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../reusables/components/ui/accordion'
+export { Alert, AlertDescription, AlertTitle } from '../reusables/components/ui/alert'
 export {
     AlertDialog,
     AlertDialogAction,
@@ -12,17 +13,15 @@ export {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '../reusables/components/ui/alert-dialog'
-export { Alert, AlertDescription, AlertTitle } from '../reusables/components/ui/alert'
 export { AspectRatio } from '../reusables/components/ui/aspect-ratio'
-export { Avatar, AvatarFallback, AvatarImage } from '../reusables/components/ui/avatar'
-
-export { Badge, badgeTextVariants, badgeVariants } from '../reusables/components/ui/badge'
+export type { AvatarFallbackProps, AvatarImageProps, AvatarProps } from '../reusables/components/ui/avatar'
+export { Avatar, AvatarFallback, AvatarImage, avatarVariants } from '../reusables/components/ui/avatar'
 export type { BadgeProps } from '../reusables/components/ui/badge'
-
-export { Button, buttonTextVariants, buttonVariants } from '../reusables/components/ui/button'
+export { Badge, badgeTextVariants, badgeVariants } from '../reusables/components/ui/badge'
 export type { ButtonProps } from '../reusables/components/ui/button'
-
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../reusables/components/ui/card'
+export { Button, buttonTextVariants, buttonVariants } from '../reusables/components/ui/button'
+export type { CardProps, CardSlotProps, CardTextProps, CardVariants } from '../reusables/components/ui/card'
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cardVariants } from '../reusables/components/ui/card'
 
 export { Checkbox } from '../reusables/components/ui/checkbox'
 export { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../reusables/components/ui/collapsible'
@@ -98,6 +97,7 @@ export { Popover, PopoverContent, PopoverTrigger } from '../reusables/components
 export { Progress } from '../reusables/components/ui/progress'
 export { RadioGroup, RadioGroupItem } from '../reusables/components/ui/radio-group'
 export {
+    type Option,
     Select,
     SelectContent,
     SelectGroup,
@@ -108,15 +108,15 @@ export {
     SelectSeparator,
     SelectTrigger,
     SelectValue,
-    type Option,
 } from '../reusables/components/ui/select'
-export { Separator } from '../reusables/components/ui/separator'
-
+export type { SeparatorProps } from '../reusables/components/ui/separator'
+export { Separator, separatorVariants } from '../reusables/components/ui/separator'
+export type { SkeletonProps } from '../reusables/components/ui/skeleton'
 export { Skeleton } from '../reusables/components/ui/skeleton'
 
 export { Switch } from '../reusables/components/ui/switch'
 export { Tabs, TabsContent, TabsList, TabsTrigger } from '../reusables/components/ui/tabs'
-export { Text, TextClassContext, UIText, textVariants } from '../reusables/components/ui/text'
+export { Text as RnrText, TextClassContext, textVariants, UIText } from '../reusables/components/ui/text'
 export type { UITextProps } from '../reusables/components/ui/text-ui'
 export { Textarea } from '../reusables/components/ui/textarea'
 export { Toggle, ToggleIcon, toggleVariants } from '../reusables/components/ui/toggle'

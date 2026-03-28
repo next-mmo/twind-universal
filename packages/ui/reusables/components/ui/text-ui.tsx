@@ -1,6 +1,6 @@
-import { createContext, useContext, type ComponentProps } from 'react'
-import { Text as PrimitiveText } from 'uniwind/components'
+import { type ComponentProps, createContext, useContext } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
+import { Text as PrimitiveText } from 'uniwind/components'
 import { cn } from '@/lib/utils'
 
 const textVariants = tv({
@@ -31,5 +31,5 @@ function UIText({ className, variant, ...props }: UITextProps) {
     return <PrimitiveText className={cn(textVariants({ variant }), inheritedClassName, className)} {...props} />
 }
 
-export { TextClassContext, UIText, textVariants }
 export type { UITextProps }
+export { TextClassContext, textVariants, UIText }

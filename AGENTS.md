@@ -33,9 +33,13 @@ Do **not** assume a root `tailwind.config.js`; theme tokens live in CSS (`@impor
 `packages/ui/components.json` follows the **shadcn** schema and points the CLI at:
 
 - Tailwind CSS: `./reusables/global.css`
-- Aliases: `./reusables/components`, `./reusables/lib/utils`, etc.
+- **Aliases** use `@/…` (e.g. `@/components/ui`, `@/lib/utils`) — **`packages/ui/tsconfig.json`** defines `paths` so `pnpm dlx shadcn@latest add …` resolves `resolvedPaths` correctly.
+- **`uniwind-types.d.ts`** at the package root declares UniWind themes for tooling.
+- **`rn-uniwind-classname.d.ts`** augments React Native (and Lucide RN) so `className` / `placeholderClassName` typecheck for UniWind + `@rn-primitives`.
 
-**Adding new primitives from the RNR CLI** is normally done from the **Expo app** (UniWind auto-detection), then syncing files into `packages/ui/reusables` — see team notes and `rnr-reusables` skill. Import aliases in this package use paths relative to `reusables/`, not `@/` from an app.
+**Bulk install (official UniWind registry):** from `packages/ui`, run a loop over `https://reactnativereusables.com/r/uniwind/<name>.json` with `shadcn add` (the RNR CLI `add --all` targets **NativeWind** by default — use **UniWind** URLs). After adding, **reconcile** repo-owned styling: this package keeps **custom** `avatar`, `badge`, `button`, `card`, `separator`, `skeleton`, and **split text** (`text-ui.tsx` = `UIText`, `text-rnr.tsx` = slot-based `Text` used inside RNR primitives; the barrel exports **`RnrText`** to avoid clashing with `Text` from `ui/primitives`).
+
+**Adding new primitives from the RNR CLI** in an Expo app is still valid; then sync into `reusables/` if needed.
 
 ## Blocks — source layout
 

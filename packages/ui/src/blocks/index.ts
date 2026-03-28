@@ -1,4 +1,3 @@
-export { ShoppingCart1, ShoppingCartBlock } from './shopping-cart'
 export { Hero3 } from './marketing'
 export {
     CalloutBlock,
@@ -8,6 +7,7 @@ export {
     SummaryPanelBlock,
     SurfaceGridBlock,
 } from './marketing-blocks'
+export { ShoppingCart1, ShoppingCartBlock } from './shopping-cart'
 export type {
     CalloutBlockProps,
     FeatureGridBlockProps,

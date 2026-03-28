@@ -2,8 +2,8 @@ import * as Slot from '@rn-primitives/slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 import { Platform, Text as RNText, type Role } from 'react-native'
-import { cn } from '@/lib/utils'
 import { TextClassContext } from '@/components/ui/text-ui'
+import { cn } from '@/lib/utils'
 
 const textVariants = cva(
     cn(
@@ -16,14 +16,8 @@ const textVariants = cva(
         variants: {
             variant: {
                 default: '',
-                h1: cn(
-                    'text-center text-4xl font-extrabold tracking-tight',
-                    Platform.select({ web: 'scroll-m-20 text-balance' }),
-                ),
-                h2: cn(
-                    'border-border border-b pb-2 text-3xl font-semibold tracking-tight',
-                    Platform.select({ web: 'scroll-m-20 first:mt-0' }),
-                ),
+                h1: cn('text-center text-4xl font-extrabold tracking-tight', Platform.select({ web: 'scroll-m-20 text-balance' })),
+                h2: cn('border-border border-b pb-2 text-3xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20 first:mt-0' })),
                 h3: cn('text-2xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
                 h4: cn('text-xl font-semibold tracking-tight', Platform.select({ web: 'scroll-m-20' })),
                 p: 'mt-3 leading-7 sm:mt-6',

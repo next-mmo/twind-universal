@@ -1,5 +1,5 @@
-import * as AspectRatioPrimitive from '@rn-primitives/aspect-ratio';
+import * as AspectRatioPrimitive from '@rn-primitives/aspect-ratio'
 
-const AspectRatio = AspectRatioPrimitive.Root;
+const AspectRatio = AspectRatioPrimitive.Root
 
-export { AspectRatio };
+export { AspectRatio }

@@ -183,11 +183,4 @@ function SurfaceGridBlock({ className, description, eyebrow, items, title }: Sur
     )
 }
 
-export {
-    CalloutBlock,
-    FeatureGridBlock,
-    PageIntroBlock,
-    StatsBlock,
-    SummaryPanelBlock,
-    SurfaceGridBlock,
-}
+export { CalloutBlock, FeatureGridBlock, PageIntroBlock, StatsBlock, SummaryPanelBlock, SurfaceGridBlock }

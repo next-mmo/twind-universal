@@ -10,13 +10,12 @@
  */
 
 export * from './blocks/index'
-export * from './primitives'
-export * from './recipes'
-export * from './reusables'
-export * from './uniwind'
-
 export * as Blocks from './blocks/index'
+export * from './primitives'
 export * as Primitives from './primitives'
+export * from './recipes'
 export * as Recipes from './recipes'
+export * from './reusables'
 export * as Reusables from './reusables'
+export * from './uniwind'
 export * as UniwindCore from './uniwind'

@@ -1,12 +1,4 @@
-import {
-    Card as CardRoot,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-    cardVariants,
-} from '../../reusables/components/ui/card'
+import { CardContent, CardDescription, CardFooter, CardHeader, Card as CardRoot, CardTitle, cardVariants } from '../../reusables/components/ui/card'
 
 const Card = Object.assign(CardRoot, {
     Body: CardContent,
@@ -17,5 +9,5 @@ const Card = Object.assign(CardRoot, {
     Title: CardTitle,
 })
 
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cardVariants }
 export type { CardProps, CardSlotProps, CardTextProps, CardVariants } from '../../reusables/components/ui/card'
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cardVariants }

@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
+        "check:typescript": "tsc --noEmit -p tsconfig.json",
         "registry:build": "shadcn build registry/registry.json -o registry/public/r -c ."
     },
     "main": "src/index.ts",

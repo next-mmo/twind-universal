@@ -31,8 +31,7 @@ export interface Hero3Props {
     className?: string
 }
 
-const DEFAULT_IMAGE =
-    'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg'
+const DEFAULT_IMAGE = 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg'
 
 function openUrl(url: string) {
     void Linking.openURL(url)
@@ -97,10 +96,7 @@ function Hero3({
                             {reviews.avatars.map((avatar, index) => (
                                 <Avatar
                                     key={`${avatar.src}-${index}`}
-                                    className={cn(
-                                        'h-12 w-12 border border-zinc-200 dark:border-zinc-700',
-                                        index > 0 && '-ml-4',
-                                    )}
+                                    className={cn('h-12 w-12 border border-zinc-200 dark:border-zinc-700', index > 0 && '-ml-4')}
                                 >
                                     <AvatarImage
                                         accessibilityLabel={avatar.alt}
@@ -116,32 +112,25 @@ function Hero3({
                                 accessibilityLabel={`${reviews.rating?.toFixed(1)} out of five stars`}
                                 className="flex-row flex-wrap items-center gap-1"
                             >
-                                {[0, 1, 2, 3, 4].map((index) => (
+                                {[0, 1, 2, 3, 4].map(index => (
                                     <UIText key={`star-${index}`} className="text-lg leading-none text-yellow-400">
                                         ★
                                     </UIText>
                                 ))}
-                                <UIText className="ml-1 font-semibold text-zinc-950 dark:text-zinc-50">
-                                    {reviews.rating?.toFixed(1)}
-                                </UIText>
+                                <UIText className="ml-1 font-semibold text-zinc-950 dark:text-zinc-50">{reviews.rating?.toFixed(1)}</UIText>
                             </View>
-                            <UIText className="text-left font-medium text-zinc-600 dark:text-zinc-400">
-                                from {reviews.count}+ reviews
-                            </UIText>
+                            <UIText className="text-left font-medium text-zinc-600 dark:text-zinc-400">from {reviews.count}+ reviews</UIText>
                         </View>
                     </View>
 
                     <View className="w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
                         {buttons.primary ? (
-                            <Button
-                                className={cn('w-full sm:w-auto', buttons.primary.className)}
-                                onPress={() => openUrl(buttons.primary!.url)}
-                            >
+                            <Button className={cn('w-full sm:w-auto', buttons.primary.className)} onPress={() => openUrl(buttons.primary!.url)}>
                                 <UIText>{buttons.primary.text}</UIText>
                             </Button>
                         ) : null}
                         {buttons.secondary ? (
-                            <Button variant="outline" onPress={() => openUrl(buttons.secondary.url)}>
+                            <Button variant="outline" onPress={() => openUrl(buttons.secondary!.url)}>
                                 <UIText>{buttons.secondary.text}</UIText>
                                 <UIText className="text-base text-zinc-900 dark:text-zinc-100">↘</UIText>
                             </Button>
