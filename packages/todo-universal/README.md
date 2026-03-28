@@ -17,6 +17,11 @@ Expo is currently outside the verified release surface for this package.
 - `routes/-platform/`: platform storage boundary
 - `styles/`: shared web CSS entry
 
+## Platform-specific files
+
+- **Views and UI** use a single `*.tsx` file: `uniwind-router`’s `Link`, `ui/primitives`, and `useLayoutInsets()` (safe area) work on web and native. Metro/Vite resolve the same module graph; duplicate `*.native.tsx` UI files are not used for screens.
+- **True splits** stay explicit: e.g. `RootRouteShell.tsx` (HTML document for TanStack Start) vs `RootRouteShell.native.tsx` (RN-only shell), and `storage.ts` / `storage.native.ts` for persistence.
+
 ## Native module rule
 
 `todo-universal` should not import app-native modules directly inside route files.

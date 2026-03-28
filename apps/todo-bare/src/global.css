@@ -1,9 +1,5 @@
 @import "tailwindcss";
 @import "uniwind";
-@import "heroui-native/styles";
-
-/* Scan heroui-native components for Tailwind class extraction */
-@source "./node_modules/heroui-native/lib";
 
 /* Scan shared todo components for Tailwind class extraction */
 @source "../../../packages/todo-universal";

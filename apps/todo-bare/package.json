@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "android": "uniwind-route-watch generate --target todo-bare -- react-native run-android --active-arch-only",
+        "android": "node ./scripts/run-android.cjs",
         "ios": "react-native run-ios",
         "routes:generate": "uniwind-route-watch generate --target todo-bare",
         "routes:watch": "uniwind-route-watch watch --target todo-bare",

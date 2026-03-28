@@ -1,12 +1,15 @@
+import { useCanGoBack } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { RecipeCard as Card } from 'ui/recipes'
 import { Pressable, ScrollView, Text, TextInput, View } from 'ui/primitives'
-import { Link, useCanGoBack, useRouter } from 'uniwind-router'
+import { RecipeCard as Card } from 'ui/recipes'
+import { Link, useRouter } from 'uniwind-router'
+import { useLayoutInsets } from '../../-hooks/useLayoutInsets'
 import { todoDetailRouteApi } from '../../-router/api'
 import { defaultTodoDetailSearch, pickTodoListSearch } from '../../-router/search'
 import { useTodos } from '../../-store/TodoContext'
 
 export function TodoDetailView() {
+    const insets = useLayoutInsets()
     const { id } = todoDetailRouteApi.useParams()
     const navigate = todoDetailRouteApi.useNavigate()
     const search = todoDetailRouteApi.useSearch()
@@ -25,8 +28,8 @@ export function TodoDetailView() {
     if (!todo) {
         return (
             <View className="flex-1 bg-white dark:bg-zinc-950 justify-center items-center px-5">
-                <Text className="text-zinc-400 text-xl">Todo not found</Text>
-                <Link to="/" search={listSearch}>
+                <Text className="text-zinc-400 text-xl font-semibold">Todo not found</Text>
+                <Link to="/" search={listSearch as any}>
                     <Text className="text-indigo-500 font-semibold mt-4 text-base">← Back to list</Text>
                 </Link>
             </View>
@@ -57,15 +60,13 @@ export function TodoDetailView() {
     }
 
     return (
-        <ScrollView className="flex-1 bg-white dark:bg-zinc-950">
-            {/* Header / Back */}
-            <View className="px-5 pt-14 pb-4 bg-indigo-500">
+        <ScrollView className="flex-1 bg-white dark:bg-zinc-950" contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
+            <View className="px-5 pb-4 bg-indigo-500" style={{ paddingTop: insets.top + 16 }}>
                 <Pressable onPress={goBack}>
                     <Text className="text-indigo-200 font-medium text-base">{canGoBack ? '← Back' : '← Back to list'}</Text>
                 </Pressable>
             </View>
 
-            {/* Title & Status */}
             <Card variant="default" className="mx-4 mt-4">
                 <Card.Header>
                     <Card.Title className="text-2xl font-bold">{todo.text}</Card.Title>
@@ -128,7 +129,6 @@ export function TodoDetailView() {
                 </Text>
             </View>
 
-            {/* Actions */}
             <View className="px-5 gap-3 pb-10 mt-4">
                 <Pressable className="bg-indigo-500 px-6 py-4 rounded-xl items-center active:opacity-80" onPress={() => toggleTodo(id)}>
                     <Text className="text-white font-semibold text-base">{todo.completed ? 'Mark Active' : 'Mark Completed'}</Text>

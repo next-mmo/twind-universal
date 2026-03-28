@@ -9,7 +9,7 @@
  */
 import { useRouter } from '@tanstack/react-router'
 import React, { useCallback } from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable, Text } from 'react-native'
 import type { UniversalLinkProps } from '../shared/types'
 
 export function Link({ to, params, search, replace, children, className, onPress, disabled, testID }: UniversalLinkProps) {
@@ -31,9 +31,7 @@ export function Link({ to, params, search, replace, children, className, onPress
     return (
         <Pressable onPress={handlePress} disabled={disabled} testID={testID} accessibilityRole="link">
             {typeof children === 'string' ? (
-                <View>
-                    <>{children}</>
-                </View>
+                <Text>{children}</Text>
             ) : (
                 children
             )}

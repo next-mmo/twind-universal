@@ -1,6 +1,7 @@
 import './global.css'
-import { routeTree } from './routeTree.gen'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { createMemoryHistory, createRouter, RouterProvider } from 'uniwind-router'
+import { routeTree } from './routeTree.gen'
 
 // Memory history for React Native (no browser URL bar)
 const router = createRouter({
@@ -20,5 +21,9 @@ declare module '@tanstack/react-router' {
 }
 
 export function App() {
-    return <RouterProvider router={router} />
+    return (
+        <SafeAreaProvider>
+            <RouterProvider router={router} />
+        </SafeAreaProvider>
+    )
 }

@@ -18,5 +18,5 @@
             "uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
         }
     },
-    "include": ["src", "index.js"]
+    "include": ["src", "index.js", "uniwind-types.d.ts"]
 }

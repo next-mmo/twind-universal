@@ -8,6 +8,10 @@
         "todo-expo": {
             "appRoot": "apps/todo-expo",
             "generatedRouteTree": "src/routeTree.gen.ts"
+        },
+        "todo-web": {
+            "appRoot": "apps/todo-web",
+            "generatedRouteTree": "src/routeTree.gen.ts"
         }
     }
 }

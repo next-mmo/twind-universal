@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "paths": {
+            "uniwind-router": ["../uniwind-router/src/index.web.ts"],
+            "ui": ["../ui/src/index.ts"],
+            "ui/*": ["../ui/src/*"]
+        }
+    },
+    "include": ["routes/**/*.ts", "routes/**/*.tsx", "uniwind-types.d.ts"]
+}

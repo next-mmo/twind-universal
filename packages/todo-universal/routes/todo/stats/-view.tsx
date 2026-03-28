@@ -1,7 +1,8 @@
-import { RecipeCard as Card } from 'ui/recipes'
 import { Pressable, ScrollView, Text, View } from 'ui/primitives'
+import { RecipeCard as Card } from 'ui/recipes'
 import { useLocation } from 'uniwind-router'
 import { RouteFeatureTabs } from '../../-components/RouteFeatureTabs'
+import { useLayoutInsets } from '../../-hooks/useLayoutInsets'
 import { todoStatsRouteApi } from '../../-router/api'
 import { defaultTodoListSearch } from '../../-router/search'
 import { defaultTodoStatsSearch } from '../../-router/stats'
@@ -18,6 +19,7 @@ const viewOptions = [
 ] as const
 
 export function TodoStatsView() {
+    const insets = useLayoutInsets()
     const navigate = todoStatsRouteApi.useNavigate()
     const search = todoStatsRouteApi.useSearch()
     const loaderData = todoStatsRouteApi.useLoaderData()
@@ -31,8 +33,8 @@ export function TodoStatsView() {
     }
 
     return (
-        <ScrollView className="flex-1 bg-white dark:bg-zinc-950">
-            <View className="px-5 pt-14 pb-4 bg-indigo-500">
+        <ScrollView className="flex-1 bg-white dark:bg-zinc-950" contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}>
+            <View className="px-5 pb-4 bg-indigo-500" style={{ paddingTop: insets.top + 16 }}>
                 <Text className="text-3xl font-bold text-white">Route Stats</Text>
                 <Text className="text-indigo-200 text-sm mt-1">{routeContext.sectionTitle}</Text>
             </View>
@@ -70,7 +72,11 @@ export function TodoStatsView() {
                                 className={`px-4 py-2 rounded-xl ${active ? 'bg-zinc-900 dark:bg-zinc-100' : 'bg-zinc-100 dark:bg-zinc-800'}`}
                                 onPress={() => navigate({ to: '/todo/stats', search: { ...defaultTodoStatsSearch, ...search, view: option.key } })}
                             >
-                                <Text className={active ? 'text-white dark:text-zinc-900 font-semibold' : 'text-zinc-600 dark:text-zinc-400 font-medium'}>
+                                <Text
+                                    className={
+                                        active ? 'text-white dark:text-zinc-900 font-semibold' : 'text-zinc-600 dark:text-zinc-400 font-medium'
+                                    }
+                                >
                                     {option.label}
                                 </Text>
                             </Pressable>
@@ -97,7 +103,7 @@ export function TodoStatsView() {
             </Card>
 
             <View className="mx-4 mt-4 gap-3">
-                {loaderData.cards.map(card => (
+                {loaderData.cards.map((card: { label: string; value: string }) => (
                     <Card key={card.label} variant="transparent">
                         <Card.Body className="gap-1">
                             <Text className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">{card.label}</Text>
@@ -121,9 +127,7 @@ export function TodoStatsView() {
             {search.view === 'raw' ? (
                 <View className="mx-4 mt-4 mb-8 rounded-2xl bg-zinc-950 p-4">
                     <Text className="text-xs uppercase tracking-widest text-zinc-500 font-semibold">Raw Loader Payload</Text>
-                    <Text className="mt-3 text-xs leading-5 text-zinc-100 font-mono">
-                        {JSON.stringify(loaderData.rawPayload, null, 2)}
-                    </Text>
+                    <Text className="mt-3 text-xs leading-5 text-zinc-100 font-mono">{JSON.stringify(loaderData.rawPayload, null, 2)}</Text>
                 </View>
             ) : (
                 <View className="px-5 pt-4 pb-8">

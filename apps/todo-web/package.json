@@ -6,7 +6,9 @@
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
-        "start": "node .output/server/index.mjs"
+        "start": "node .output/server/index.mjs",
+        "routes:generate": "uniwind-route-watch generate --target todo-web",
+        "routes:watch": "uniwind-route-watch watch --target todo-web"
     },
     "dependencies": {
         "@tailwindcss/vite": "4.2.1",
@@ -16,6 +18,7 @@
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-native": "catalog:",
+        "react-native-safe-area-context": "*",
         "react-native-web": "catalog:",
         "tailwindcss": "catalog:",
         "uniwind": "^1.5.0",
@@ -24,6 +27,7 @@
         "ui": "workspace:*"
     },
     "devDependencies": {
+        "uniwind-router-tools": "workspace:*",
         "@types/node": "24.10.1",
         "@types/react": "catalog:",
         "@types/react-dom": "19.2.3",
