@@ -1,124 +1,89 @@
-import { createContext, type ReactNode, useCallback, useContext, useState, useEffect } from 'react'
-import type { Todo, TodoFilter } from './types'
+import { createContext, type ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { todoStorage } from '../-platform/storage'
+import {
+    TODO_STORAGE_KEY,
+    addTodoToList,
+    clearCompletedTodos,
+    createDemoTodos,
+    deleteTodoFromList,
+    getInitialTodos,
+    getTodoById,
+    getTodoStats,
+    serializeTodos,
+    toggleTodoInList,
+    updateTodoInList,
+} from './model'
+import type { Todo } from './types'
 
 interface TodoContextValue {
     todos: Todo[]
-    filteredTodos: Todo[]
-    filter: TodoFilter
-    setFilter: (f: TodoFilter) => void
     addTodo: (text: string) => void
-    toggleTodo: (id: string) => void
-    deleteTodo: (id: string) => void
-    updateTodo: (id: string, updates: Partial<Todo>) => void
     clearCompleted: () => void
+    deleteTodo: (id: string) => void
     getTodo: (id: string) => Todo | undefined
-    stats: { total: number; active: number; completed: number }
+    resetDemo: () => void
+    storageMode: typeof todoStorage.kind
+    stats: ReturnType<typeof getTodoStats>
+    toggleTodo: (id: string) => void
+    updateTodo: (id: string, updates: Partial<Todo>) => void
 }
 
 const TodoContext = createContext<TodoContextValue | null>(null)
 
-function getTodoStorage(): Pick<Storage, 'getItem' | 'setItem'> | null {
-    if (typeof localStorage === 'undefined') {
-        return null
-    }
-
-    if (typeof localStorage.getItem !== 'function' || typeof localStorage.setItem !== 'function') {
-        return null
-    }
-
-    return localStorage
-}
-
 export function TodoProvider({ children }: { children: ReactNode }) {
-    const [todos, setTodos] = useState<Todo[]>(() => {
-        const storage = getTodoStorage()
-        if (storage) {
-            try {
-                const saved = storage.getItem('todos')
-                if (saved) return JSON.parse(saved)
-            } catch (e) {
-                console.error('Failed to load todos', e)
-            }
-        }
-        return []
-    })
-    const [filter, setFilter] = useState<TodoFilter>('all')
+    const [todos, setTodos] = useState<Todo[]>(() => getInitialTodos(todoStorage.load(TODO_STORAGE_KEY)))
 
     useEffect(() => {
-        const storage = getTodoStorage()
-        if (storage) {
-            try {
-                storage.setItem('todos', JSON.stringify(todos))
-            } catch (e) {
-                console.error('Failed to save todos', e)
+        try {
+            todoStorage.save(TODO_STORAGE_KEY, serializeTodos(todos))
+        } catch (error) {
+            if (typeof console !== 'undefined') {
+                console.error('Failed to save todos', error)
             }
         }
     }, [todos])
 
     const addTodo = useCallback((text: string) => {
-        const trimmed = text.trim()
-        if (!trimmed) return
-
-        setTodos(prev => [
-            {
-                id: Date.now().toString(),
-                text: trimmed,
-                completed: false,
-                createdAt: Date.now(),
-            },
-            ...prev,
-        ])
+        setTodos(prev => addTodoToList(prev, text))
     }, [])
 
     const toggleTodo = useCallback((id: string) => {
-        setTodos(prev => prev.map(t => (t.id === id ? { ...t, completed: !t.completed } : t)))
+        setTodos(prev => toggleTodoInList(prev, id))
     }, [])
 
     const deleteTodo = useCallback((id: string) => {
-        setTodos(prev => prev.filter(t => t.id !== id))
+        setTodos(prev => deleteTodoFromList(prev, id))
     }, [])
 
     const updateTodo = useCallback((id: string, updates: Partial<Todo>) => {
-        setTodos(prev => prev.map(t => (t.id === id ? { ...t, ...updates } : t)))
+        setTodos(prev => updateTodoInList(prev, id, updates))
     }, [])
 
     const clearCompleted = useCallback(() => {
-        setTodos(prev => prev.filter(t => !t.completed))
+        setTodos(prev => clearCompletedTodos(prev))
     }, [])
 
-    const getTodo = useCallback(
-        (id: string) => {
-            return todos.find(t => t.id === id)
-        },
-        [todos],
-    )
+    const resetDemo = useCallback(() => {
+        setTodos(createDemoTodos())
+    }, [])
 
-    const filteredTodos = todos.filter(todo => {
-        if (filter === 'active') return !todo.completed
-        if (filter === 'completed') return todo.completed
-        return true
-    })
+    const getTodo = useCallback((id: string) => getTodoById(todos, id), [todos])
 
-    const stats = {
-        total: todos.length,
-        active: todos.filter(t => !t.completed).length,
-        completed: todos.filter(t => t.completed).length,
-    }
+    const stats = useMemo(() => getTodoStats(todos), [todos])
 
     return (
         <TodoContext.Provider
             value={{
-                todos,
-                filteredTodos,
-                filter,
-                setFilter,
                 addTodo,
-                toggleTodo,
-                deleteTodo,
-                updateTodo,
                 clearCompleted,
+                deleteTodo,
                 getTodo,
+                resetDemo,
                 stats,
+                storageMode: todoStorage.kind,
+                todos,
+                toggleTodo,
+                updateTodo,
             }}
         >
             {children}

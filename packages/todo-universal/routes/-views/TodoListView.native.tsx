@@ -25,7 +25,7 @@ export function TodoListView() {
     const insets = useSafeAreaInsets()
     const navigate = todoListRouteApi.useNavigate()
     const search = todoListRouteApi.useSearch()
-    const { todos, addTodo, toggleTodo, clearCompleted, stats } = useTodos()
+    const { todos, addTodo, toggleTodo, clearCompleted, resetDemo, stats, storageMode } = useTodos()
     const [text, setText] = useState('')
     const visibleTodos = filterAndSortTodos(todos, search)
     const statsSearch = { ...defaultTodoStatsSearch, ...search }
@@ -149,13 +149,18 @@ export function TodoListView() {
 
             <View style={[styles.footer, { paddingBottom: insets.bottom + 12 }]}>
                 <Text style={styles.footerText}>
-                    Typed route search: {search.filter} / {search.q || '""'} / {search.sort}
+                    Typed route search: {search.filter} / {search.q || '""'} / {search.sort} / {storageMode}
                 </Text>
-                {stats.completed > 0 ? (
-                    <Pressable onPress={clearCompleted}>
-                        <Text style={styles.clearCompleted}>Clear completed ({stats.completed})</Text>
+                <View style={styles.footerActions}>
+                    <Pressable onPress={resetDemo}>
+                        <Text style={styles.resetDemo}>Reset demo</Text>
                     </Pressable>
-                ) : null}
+                    {stats.completed > 0 ? (
+                        <Pressable onPress={clearCompleted}>
+                            <Text style={styles.clearCompleted}>Clear completed ({stats.completed})</Text>
+                        </Pressable>
+                    ) : null}
+                </View>
             </View>
         </View>
     )
@@ -311,6 +316,16 @@ const styles = StyleSheet.create({
     footerText: {
         color: '#6b7280',
         fontSize: 13,
+    },
+    footerActions: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 14,
+    },
+    resetDemo: {
+        color: '#4f46e5',
+        fontSize: 14,
+        fontWeight: '700',
     },
     clearCompleted: {
         color: '#dc2626',
