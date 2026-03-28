@@ -3,8 +3,7 @@
 
 /* Scan shared todo components for Tailwind class extraction */
 @source "../../../packages/todo-universal";
-@source "../../../packages/uniwind-ui/src";
-@source "../../../packages/ui/src";
+@source "../../../packages/ui";
 
 @theme {
     --color-primary: oklch(0.55 0.22 270);

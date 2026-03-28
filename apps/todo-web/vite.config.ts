@@ -59,8 +59,7 @@ function fixOptimizeDeps(): Plugin {
 
 /**
  * React Native packages that have no web-compatible entry points and need
- * to be stubbed in web builds. These come from transitive dependencies
- * of heroui-native (imported via uniwind-ui).
+ * to be stubbed in web builds.
  */
 const RN_NATIVE_ONLY_PACKAGES = [
   "@gorhom/bottom-sheet",
@@ -80,7 +79,7 @@ const RN_NATIVE_ONLY_PACKAGES = [
  * Handles module resolution for workspace packages and React Native
  * compatibility in web builds:
  *
- * 1. Resolves `uniwind-ui`, `ui`, and `uniwind-router` from the app's node_modules
+ * 1. Resolves `ui` and `uniwind-router` from the app's node_modules
  *    since `packages/todo-universal` doesn't have its own package resolution chain.
  *
  * 2. Redirects `react-native` to a virtual module that re-exports react-native-web
@@ -92,7 +91,6 @@ const RN_NATIVE_ONLY_PACKAGES = [
 function resolveWorkspaceDeps(): Plugin {
   const pkgDir = import.meta.dirname;
   const resolveMap: Record<string, string> = {
-    "uniwind-ui": path.resolve(pkgDir, "node_modules/uniwind-ui/src/index.ts"),
     ui: path.resolve(pkgDir, "node_modules/ui/src/index.ts"),
     "uniwind-router": path.resolve(pkgDir, "node_modules/uniwind-router/src/index.web.ts"),
   };
@@ -551,8 +549,6 @@ export default defineConfig(({ mode }) => ({
     // resolveWorkspaceDeps stubs apply. In SSR, react-native-web imports are
     // also intercepted and replaced with lightweight stubs.
     noExternal: [
-      "heroui-native",
-      "uniwind-ui",
       "ui",
       "uniwind",
       "tailwind-variants",

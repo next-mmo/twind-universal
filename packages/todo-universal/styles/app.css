@@ -3,8 +3,7 @@
 
 /* Scan shared todo components for Tailwind class extraction */
 @source "..";
-@source "../../ui/src";
-@source "../../uniwind-ui/src";
+@source "../../ui";
 
 @layer theme {
     :root {

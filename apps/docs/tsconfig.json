@@ -17,7 +17,9 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"],
-            "collections/*": [".source/*"]
+            "collections/*": [".source/*"],
+            "ui": ["../../packages/ui/src/index.ts"],
+            "ui/*": ["../../packages/ui/src/*"]
         },
         "noEmit": true
     }

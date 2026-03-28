@@ -1,0 +1,21 @@
+declare module 'uniwind/components' {
+    export const ActivityIndicator: any
+    export const FlatList: any
+    export const Image: any
+    export const ImageBackground: any
+    export const KeyboardAvoidingView: any
+    export const Modal: any
+    export const Pressable: any
+    export const RefreshControl: any
+    export const SafeAreaView: any
+    export const ScrollView: any
+    export const SectionList: any
+    export const Text: any
+    export const TextInput: any
+    export const TouchableHighlight: any
+    export const TouchableNativeFeedback: any
+    export const TouchableOpacity: any
+    export const TouchableWithoutFeedback: any
+    export const View: any
+    export const VirtualizedList: any
+}

@@ -12,8 +12,7 @@ The repo is easier to understand when each package has a sharp responsibility.
 | --- | --- |
 | `uniwind-router` | Platform-aware TanStack Router bridge with a native-friendly `Link` and history helpers |
 | `uniwind-router-tools` | Route generation and watch tooling for the shell apps |
-| `uniwind-ui` | Shared provider surface and component exports built around Uniwind and HeroUI Native |
-| `ui` | Additional component workspace used by the repo |
+| `ui` | Shared React Native Reusables + Uniwind surface for primitives, recipes, and blocks |
 | `todo-universal` | Shared route modules, store, views, and styles for the universal todo demo |
 
 ## `uniwind-router`
@@ -24,15 +23,14 @@ This package is the key interoperability layer. The important idea is simple:
 - Native can map navigation onto `Pressable` and memory history.
 - The rest of TanStack Router stays shared.
 
-## `uniwind-ui`
+## `ui`
 
-`uniwind-ui` re-exports the shared UI surface the repo actually uses:
+`ui` now owns the shared UI surface the repo actually uses:
 
-- HeroUI Native components
+- repo-owned React Native Reusables style components
 - Uniwind utilities
 - native primitives without import collisions
-
-That makes it a practical import boundary for the todo views and route shells.
+- shared composition blocks used in docs and app flows
 
 ## `todo-universal`
 

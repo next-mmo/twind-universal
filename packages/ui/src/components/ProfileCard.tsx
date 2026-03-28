@@ -1,30 +1,6 @@
-/**
- * ProfileCard — A pre-composed card for displaying user profile information.
- *
- * Built on top of the base Card components using rnr-reusables pattern
- * with uniwind for cross-platform styling.
- *
- * Usage:
- *   <ProfileCard
- *     name="Jane Doe"
- *     role="Senior Engineer"
- *     avatarUrl="https://..."
- *     stats={[
- *       { label: 'Projects', value: '42' },
- *       { label: 'Reviews', value: '128' },
- *     ]}
- *   />
- */
-import { Image, Pressable, Text, View } from '../primitives'
+import { View } from '../primitives'
 import { tv, type VariantProps } from 'tailwind-variants'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from './Card'
+import { Avatar, AvatarFallback, AvatarImage, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, UIText } from '../reusables'
 
 // ── Variants ──────────────────────────────────────────────────────────
 
@@ -42,18 +18,18 @@ const profileCardVariants = tv({
   },
 })
 
-const avatarVariants = tv({
-  base: 'rounded-full bg-zinc-200 dark:bg-zinc-700',
-  variants: {
-    size: {
-      sm: 'w-10 h-10',
-      md: 'w-14 h-14',
-      lg: 'w-20 h-20',
+const profileAvatarVariants = tv({
+    base: '',
+    variants: {
+        size: {
+            sm: 'h-10 w-10',
+            md: 'h-14 w-14',
+            lg: 'h-20 w-20',
+        },
     },
-  },
-  defaultVariants: {
-    size: 'md',
-  },
+    defaultVariants: {
+        size: 'md',
+    },
 })
 
 // ── Types ─────────────────────────────────────────────────────────────
@@ -66,95 +42,63 @@ interface StatItem {
 type ProfileCardVariants = VariantProps<typeof profileCardVariants>
 
 interface ProfileCardProps extends ProfileCardVariants {
-  /** Display name */
-  name: string
-  /** Role / subtitle */
-  role?: string
-  /** Avatar image URI */
-  avatarUrl?: string
-  /** Optional stats to show in the footer */
-  stats?: StatItem[]
-  /** Optional action button label */
-  actionLabel?: string
-  /** Callback when the action button is pressed */
-  onAction?: () => void
-  /** Additional className to merge */
-  className?: string
+    actionLabel?: string
+    avatarUrl?: string
+    className?: string
+    name: string
+    onAction?: () => void
+    role?: string
+    stats?: StatItem[]
 }
 
 // ── Component ─────────────────────────────────────────────────────────
 
 function ProfileCard({
-  name,
-  role,
-  avatarUrl,
-  stats,
-  actionLabel,
-  onAction,
-  size,
-  className,
+    actionLabel,
+    avatarUrl,
+    className,
+    name,
+    onAction,
+    role,
+    size,
+    stats,
 }: ProfileCardProps) {
-  return (
-    <Card className={profileCardVariants({ size, className })}>
-      <CardHeader className="flex-row items-center gap-4">
-        {/* Avatar */}
-        {avatarUrl ? (
-          <Image
-            source={{ uri: avatarUrl }}
-            className={avatarVariants({ size })}
-          />
-        ) : (
-          <View className={avatarVariants({ size }) + ' items-center justify-center'}>
-            <Text className="text-zinc-500 dark:text-zinc-300 font-bold text-lg">
-              {name.charAt(0).toUpperCase()}
-            </Text>
-          </View>
-        )}
+    return (
+        <Card className={profileCardVariants({ size, className })}>
+            <CardHeader className="flex-row items-center gap-4">
+                <Avatar className={profileAvatarVariants({ size })}>
+                    {avatarUrl ? <AvatarImage source={{ uri: avatarUrl }} /> : <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>}
+                </Avatar>
+                <View className="flex-1">
+                    <CardTitle className="text-lg">{name}</CardTitle>
+                    {role ? <CardDescription>{role}</CardDescription> : null}
+                </View>
+            </CardHeader>
 
-        {/* Name & Role */}
-        <View className="flex-1">
-          <CardTitle className="text-lg">{name}</CardTitle>
-          {role ? (
-            <CardDescription>{role}</CardDescription>
-          ) : null}
-        </View>
-      </CardHeader>
+            {stats?.length ? (
+                <CardContent>
+                    <View className="flex-row flex-wrap gap-6">
+                        {stats.map(stat => (
+                            <View key={stat.label} className="items-center gap-1">
+                                <UIText className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{stat.value}</UIText>
+                                <UIText className="text-xs text-zinc-500 dark:text-zinc-400">{stat.label}</UIText>
+                            </View>
+                        ))}
+                    </View>
+                </CardContent>
+            ) : null}
 
-      {/* Stats */}
-      {stats && stats.length > 0 ? (
-        <CardContent>
-          <View className="flex-row gap-6">
-            {stats.map((stat) => (
-              <View key={stat.label} className="items-center">
-                <Text className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-                  {stat.value}
-                </Text>
-                <Text className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                  {stat.label}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </CardContent>
-      ) : null}
-
-      {/* Action Footer */}
-      {actionLabel && onAction ? (
-        <CardFooter>
-          <Pressable
-            className="flex-1 bg-indigo-500 rounded-xl py-3 items-center active:opacity-80"
-            onPress={onAction}
-          >
-            <Text className="text-white font-semibold text-sm">
-              {actionLabel}
-            </Text>
-          </Pressable>
-        </CardFooter>
-      ) : null}
-    </Card>
-  )
+            {actionLabel && onAction ? (
+                <CardFooter>
+                    <Button className="flex-1" onPress={onAction}>
+                        <UIText>{actionLabel}</UIText>
+                    </Button>
+                </CardFooter>
+            ) : null}
+        </Card>
+    )
 }
 ProfileCard.displayName = 'ProfileCard'
 
-export { ProfileCard, profileCardVariants, avatarVariants }
+export { ProfileCard, profileAvatarVariants, profileCardVariants }
 export type { ProfileCardProps, ProfileCardVariants, StatItem }

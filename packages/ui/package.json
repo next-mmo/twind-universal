@@ -9,9 +9,9 @@
             "import": "./src/index.ts",
             "types": "./src/index.ts"
         },
-        "./heroui": {
-            "import": "./src/heroui.ts",
-            "types": "./src/heroui.ts"
+        "./blocks": {
+            "import": "./src/blocks.tsx",
+            "types": "./src/blocks.tsx"
         },
         "./primitives": {
             "import": "./src/primitives.ts",
@@ -21,6 +21,10 @@
             "import": "./src/recipes.ts",
             "types": "./src/recipes.ts"
         },
+        "./reusables": {
+            "import": "./src/reusables.ts",
+            "types": "./src/reusables.ts"
+        },
         "./uniwind": {
             "import": "./src/uniwind.ts",
             "types": "./src/uniwind.ts"
@@ -29,7 +33,7 @@
     "dependencies": {
         "tailwind-variants": "^3.0.0",
         "tailwind-merge": "^3.5.0",
-        "uniwind-ui": "workspace:*"
+        "uniwind": "^1.5.0"
     },
     "peerDependencies": {
         "react": ">=18",

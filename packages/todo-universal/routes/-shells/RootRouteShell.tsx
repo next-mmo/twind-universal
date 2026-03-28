@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import { HeadContent, Outlet, Scripts } from '@tanstack/react-router'
-import type { ReactNode } from 'react'
+import { Fragment, type ReactNode } from 'react'
+import { Platform } from 'react-native'
 import { TodoProvider } from '../-store/TodoContext'
 import '../../styles/app.css'
 
@@ -15,6 +16,10 @@ export function RootRouteShell() {
 }
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+    if (Platform.OS !== 'web') {
+        return <Fragment>{children}</Fragment>
+    }
+
     return (
         <html>
             <head>

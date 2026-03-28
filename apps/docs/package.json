@@ -23,10 +23,10 @@
         "react": "catalog:",
         "react-dom": "catalog:",
         "tailwind-merge": "^3.5.0",
+        "ui": "workspace:*",
         "vite": "^8.0.0",
         "uniwind": "^1.5.0",
-        "uniwind-router": "workspace:*",
-        "uniwind-ui": "workspace:*"
+        "uniwind-router": "workspace:*"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.2.1",

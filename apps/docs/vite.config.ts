@@ -1,3 +1,4 @@
+import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import react from '@vitejs/plugin-react'
@@ -26,6 +27,7 @@ export default defineConfig({
     resolve: {
         tsconfigPaths: true,
         alias: {
+            'ui/blocks': path.resolve(import.meta.dirname, '../../packages/ui/src/blocks.web.tsx'),
             tslib: 'tslib/tslib.es6.js',
         },
     },

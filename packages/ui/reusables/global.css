@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@import "uniwind";
+
+@theme {
+    --radius: 1rem;
+    --radius-sm: calc(var(--radius) - 0.25rem);
+    --radius-md: calc(var(--radius) - 0.125rem);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 0.25rem);
+}
+
+@layer theme {
+    :root {
+        @variant light {
+            --color-ui-surface: oklch(1 0 0);
+            --color-ui-surface-strong: oklch(0.985 0 0);
+            --color-ui-ink: oklch(0.2 0 0);
+            --color-ui-muted: oklch(0.56 0 0);
+            --color-ui-line: oklch(0.92 0 0);
+            --color-ui-accent: oklch(0.55 0.22 270);
+        }
+
+        @variant dark {
+            --color-ui-surface: oklch(0.18 0 0);
+            --color-ui-surface-strong: oklch(0.22 0 0);
+            --color-ui-ink: oklch(0.97 0 0);
+            --color-ui-muted: oklch(0.72 0 0);
+            --color-ui-line: oklch(0.3 0 0);
+            --color-ui-accent: oklch(0.7 0.16 280);
+        }
+    }
+}

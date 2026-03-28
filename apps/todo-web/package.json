@@ -23,7 +23,6 @@
         "tailwindcss": "catalog:",
         "uniwind": "^1.5.0",
         "uniwind-router": "workspace:*",
-        "uniwind-ui": "workspace:*",
         "ui": "workspace:*"
     },
     "devDependencies": {

@@ -1,24 +1,22 @@
+/// <reference path="./uniwind-components.d.ts" />
 /**
- * ui — HeroUI-first universal UI surface
+ * ui — shared React Native Reusables + Uniwind surface
  *
  * This package provides:
- * - HeroUI Native as the main component surface
- * - Uniwind primitives as the fallback layer for primitives HeroUI does not expose
- * - Uniwind utilities for authoring
- * - Local recipe components under non-conflicting names
- *
- * Usage:
- *   import { Button, Card, Pressable, Text, ProfileCard, RecipeCard, HeroUI, Primitives, UniwindCore } from "ui";
+ * - repo-owned reusables components built on Uniwind
+ * - native primitives for low-level composition
+ * - higher-level recipes and shared page blocks
+ * - Uniwind authoring utilities
  */
 
-export * from './heroui'
+export * from './blocks'
 export * from './primitives'
 export * from './recipes'
+export * from './reusables'
 export * from './uniwind'
 
-export * as HeroUI from './heroui'
+export * as Blocks from './blocks'
 export * as Primitives from './primitives'
 export * as Recipes from './recipes'
+export * as Reusables from './reusables'
 export * as UniwindCore from './uniwind'
-
-export { HeroUINativeProvider as UIProvider } from './heroui'

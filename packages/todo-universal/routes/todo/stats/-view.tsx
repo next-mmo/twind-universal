@@ -1,5 +1,5 @@
+import { StatsBlock, SummaryPanelBlock } from 'ui/blocks'
 import { Pressable, ScrollView, Text, View } from 'ui/primitives'
-import { RecipeCard as Card } from 'ui/recipes'
 import { useLocation } from 'uniwind-router'
 import { RouteFeatureTabs } from '../../-components/RouteFeatureTabs'
 import { useLayoutInsets } from '../../-hooks/useLayoutInsets'
@@ -89,29 +89,25 @@ export function TodoStatsView() {
                 </Pressable>
             </View>
 
-            <Card variant="default" className="mx-4 mt-4">
-                <Card.Header>
-                    <Card.Title>{loaderData.headline}</Card.Title>
-                    <Card.Description>
-                        {loaderData.platform} / {loaderData.appName}
-                    </Card.Description>
-                </Card.Header>
-                <Card.Body className="gap-2">
-                    <Text className="text-sm text-zinc-600 dark:text-zinc-300">{loaderData.summary}</Text>
-                    <Text className="text-xs text-zinc-400 dark:text-zinc-600">Generated {loaderData.generatedAt}</Text>
-                </Card.Body>
-            </Card>
+            <SummaryPanelBlock
+                className="mx-4 mt-4"
+                eyebrow="Loader Snapshot"
+                title={loaderData.headline}
+                description={loaderData.summary}
+                meta={`${loaderData.platform} / ${loaderData.appName}`}
+                footer={<Text className="text-xs text-zinc-400 dark:text-zinc-600">Generated {loaderData.generatedAt}</Text>}
+            />
 
-            <View className="mx-4 mt-4 gap-3">
-                {loaderData.cards.map((card: { label: string; value: string }) => (
-                    <Card key={card.label} variant="transparent">
-                        <Card.Body className="gap-1">
-                            <Text className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">{card.label}</Text>
-                            <Text className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{card.value}</Text>
-                        </Card.Body>
-                    </Card>
-                ))}
-            </View>
+            <StatsBlock
+                className="mx-4 mt-4"
+                eyebrow="Derived Metrics"
+                title="Shared summary block usage inside the universal app flow"
+                description="These values come from loader output, but the layout now comes from `ui/blocks` instead of screen-local cards."
+                items={loaderData.cards.map((card: { label: string; value: string }) => ({
+                    label: card.label,
+                    value: card.value,
+                }))}
+            />
 
             <View className="mx-4 mt-4 rounded-2xl bg-zinc-100 dark:bg-zinc-900 p-4">
                 <Text className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">Hook Snapshot</Text>

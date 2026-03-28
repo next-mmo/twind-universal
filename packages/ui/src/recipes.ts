@@ -9,7 +9,7 @@ import {
 } from './components/Card'
 import {
   ProfileCard,
-  avatarVariants,
+  profileAvatarVariants,
   profileCardVariants,
 } from './components/ProfileCard'
 
@@ -23,7 +23,7 @@ export const recipeCardVariants = cardVariants
 
 export {
   ProfileCard,
-  avatarVariants,
+  profileAvatarVariants,
   profileCardVariants,
 }
 export type {

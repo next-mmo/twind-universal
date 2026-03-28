@@ -2,6 +2,8 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+@source "../../../../packages/ui";
+
 :root {
     --uw-bg-light: #f8fafc;
     --uw-bg-dark: #020617;

@@ -13,7 +13,6 @@
         "@gorhom/bottom-sheet": "*",
         "@tanstack/react-router": "^1.166.8",
         "ui": "workspace:*",
-        "heroui-native": "*",
         "react": "catalog:",
         "react-native": "catalog:",
         "react-native-gesture-handler": "*",
@@ -23,8 +22,7 @@
         "react-native-svg": "*",
         "react-native-worklets": "*",
         "uniwind": "^1.5.0",
-        "uniwind-router": "workspace:*",
-        "uniwind-ui": "workspace:*"
+        "uniwind-router": "workspace:*"
     },
     "devDependencies": {
         "@babel/core": "7.25.2",

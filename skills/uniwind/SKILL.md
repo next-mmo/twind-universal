@@ -12,7 +12,7 @@ description: >
   colorClassName, tintColorClassName, contentContainerClassName, Uniwind Pro
   (animations, transitions, shadow tree, native insets), safe area utilities,
   gradients, hairlineWidth(), fontScale(), pixelRatio(), light-dark(), OKLCH,
-  cn, tailwind-merge, HeroUI Native, react-native-reusables, Gluestack.
+  cn, tailwind-merge, react-native-reusables, Gluestack.
   Does NOT handle migration — use migrate-nativewind-to-uniwind skill.
 ---
 
@@ -1515,14 +1515,6 @@ Keep React Navigation's `<ThemeProvider>` if already in use — it manages navig
 
 ## UI Kit Compatibility
 
-- **HeroUI Native**: Works with Uniwind. Uses `tailwind-variants` (tv) internally. Apply `className` directly on HeroUI components. **Bun users**: Bun uses symlinks for `node_modules`, which can cause Tailwind's Oxide scanner to miss library classes in production builds. Fix: use the resolved path in `@source` and hoist the package:
-  ```css
-  @source "../../node_modules/heroui-native/lib";
-  ```
-  ```ini
-  # .npmrc
-  public-hoist-pattern[]=heroui-native
-  ```
 - **react-native-reusables**: Compatible.
 - **Gluestack v4.1+**: Compatible.
 - **Lucide React Native**: Use `withUniwind(LucideIcon)` with `colorClassName="accent-blue-500"` for icon color. Works for all Lucide icons.
@@ -1797,7 +1789,7 @@ When styles aren't working, check in this order:
 | `Failed to serialize javascript object` from llms-full.txt or docs | Docs/markdown files with CSS classes in project dir get scanned by Tailwind | Move `.md` files with CSS examples outside the project root, or add to `.gitignore` so Tailwind's scanner skips them |
 | `unstable_enablePackageExports` conflict | App disables package exports | Use selective resolver for Uniwind and culori |
 | Classes from monorepo package missing | Not included in Tailwind scan | Add `@source '../../packages/ui'` in global.css |
-| Classes from `node_modules` library missing in production (bun) | Bun uses symlinks; Tailwind's Oxide scanner can't follow them | Use resolved path: `@source "../../node_modules/heroui-native/lib"` and add `public-hoist-pattern[]=heroui-native` to `.npmrc` |
+| Classes from `node_modules` library missing in production (bun) | Bun uses symlinks; Tailwind's Oxide scanner can't follow them | Use the resolved package path in `@source` and hoist the package in `.npmrc` so Tailwind can scan it |
 | `active:` not working with `withUniwind` | `withUniwind` does NOT support interactive state selectors | Only core RN `Pressable`/`TextInput`/`Switch` support `active:`/`focus:`/`disabled:`. Third-party pressables wrapped with `withUniwind` won't get states |
 | `withUniwind` custom mapping overrides `className`+`style` merging | When manual mapping is provided, `style` prop is not merged | Use auto mapping (no second arg) for `className`+`style` merge. For manual mapping + `className`, double-wrap: `withUniwind(withUniwind(Comp), { mapping })` |
 | `withUniwind` loses generic types on `ref` (e.g., `FlashList<T>`) | TypeScript limitation with HOCs | Cast the ref manually: `ref={scrollRef as any}` |
@@ -1881,7 +1873,7 @@ Clear caches: `watchman watch-del-all; rm -rf node_modules/.cache; npx expo star
 Free: Install `react-native-safe-area-context`, wrap root with `SafeAreaListener`, call `Uniwind.updateInsets(insets)`. Pro: Automatic — no setup. Then use `pt-safe`, `pb-safe`, etc. See the **Safe Area Utilities** section above.
 
 **What UI kits work well with Uniwind?**
-**React Native Reusables** (shadcn philosophy, copy-paste components) and **HeroUI Native** (complete library, optimized for Uniwind). Any library works via `withUniwind` wrapper. See the **UI Kit Compatibility** section above.
+**React Native Reusables** (shadcn philosophy, copy-paste components) and **Gluestack v4.1+** work well. Any library can also be adapted via `withUniwind`. See the **UI Kit Compatibility** section above.
 
 **Can I scope a theme to a single component?**
 Yes, use `ScopedTheme`: `<ScopedTheme theme="dark"><Card /></ScopedTheme>`. It forces a theme for the subtree without changing the global theme. See the **Theming** section.

@@ -11,12 +11,14 @@
         "check:format": "biome check",
         "precommit": "turbo precommit",
         "test": "turbo test",
+        "test:e2e": "playwright test",
         "test:todo-routes": "vitest run",
         "format": "biome check --fix",
         "circular:check": "turbo circular:check"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.4.7",
+        "@playwright/test": "^1.58.2",
         "husky": "9.1.7",
         "turbo": "2.8.16",
         "typescript": "catalog:",

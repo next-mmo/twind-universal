@@ -10,13 +10,10 @@
         "paths": {
             "@todo/*": ["../../packages/todo-universal/*"],
             "@todo-universal/*": ["../../packages/todo-universal/*"],
-            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"],
             "uniwind-router": ["../../packages/uniwind-router/src/index.native.ts"],
             "ui": ["../../packages/ui/src/index.ts"],
-            "ui/*": ["../../packages/ui/src/*"],
-            "uniwind-ui": ["../../packages/uniwind-ui/src/index.ts"],
-            "uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
+            "ui/*": ["../../packages/ui/src/*"]
         }
     },
-    "include": ["src", "index.js", "uniwind-types.d.ts"]
+    "include": ["src", "index.js", "uniwind-types.d.ts", "../../packages/ui/src/**/*.d.ts"]
 }

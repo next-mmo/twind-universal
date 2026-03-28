@@ -13,8 +13,6 @@ const aliasRoots = {
     react: path.join(workspaceRoot, 'node_modules/react'),
     'react-native': path.join(workspaceRoot, 'node_modules/react-native'),
     ui: uiPackageSrc,
-    'uniwind-ui': path.join(workspaceRoot, 'packages/uniwind-ui/src'),
-    '@uniwind-ui': path.join(workspaceRoot, 'packages/uniwind-ui/src'),
 }
 
 /**
@@ -28,7 +26,6 @@ const config = {
         path.join(workspaceRoot, 'packages/ui'),
         path.join(workspaceRoot, 'packages/uniwind-router'),
         path.join(workspaceRoot, 'packages/todo-universal'),
-        path.join(workspaceRoot, 'packages/uniwind-ui'),
         path.join(workspaceRoot, 'node_modules'),
     ],
     resolver: {
