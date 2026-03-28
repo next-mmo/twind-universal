@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": ["reusables/components/*"],
+            "@/lib/*": ["reusables/lib/*"],
+            "@/hooks/*": ["reusables/hooks/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx", "reusables/**/*.ts", "reusables/**/*.tsx", "uniwind-types.d.ts"]
+}

@@ -1,0 +1,75 @@
+{
+    "$schema": "https://ui.shadcn.com/schema/registry.json",
+    "name": "uniwind",
+    "homepage": "https://uniwind.dev",
+    "items": [
+        {
+            "name": "shopping-cart",
+            "type": "registry:block",
+            "title": "Shopping cart",
+            "description": "Cart with line items, totals, and empty state for React Native and Uniwind.",
+            "categories": ["blocks", "ecommerce"],
+            "dependencies": [],
+            "registryDependencies": [],
+            "files": [
+                {
+                    "path": "src/blocks/shopping-cart/shopping-cart-block.tsx",
+                    "type": "registry:component"
+                },
+                {
+                    "path": "src/blocks/shopping-cart/types.ts",
+                    "type": "registry:lib"
+                },
+                {
+                    "path": "src/blocks/shopping-cart/index.ts",
+                    "type": "registry:lib"
+                }
+            ],
+            "docs": "Depends on local `reusables` (Button, Separator, UIText), `reusables/lib/utils` (cn), and `uniwind`. Align import paths with your app aliases after install."
+        },
+        {
+            "name": "marketing-blocks",
+            "type": "registry:block",
+            "title": "Marketing blocks",
+            "description": "Page intro, stats, feature grid, callout, summary panel, and surface grid blocks.",
+            "categories": ["blocks", "marketing"],
+            "dependencies": [],
+            "registryDependencies": [],
+            "files": [
+                {
+                    "path": "src/blocks/marketing-blocks.tsx",
+                    "type": "registry:component"
+                },
+                {
+                    "path": "src/blocks/types.ts",
+                    "type": "registry:lib"
+                },
+                {
+                    "path": "src/blocks/shopping-cart/types.ts",
+                    "type": "registry:lib"
+                }
+            ],
+            "docs": "`types.ts` re-exports shopping-cart types; those files are included so the barrel resolves. Depends on `reusables` (Badge, Card, Separator, UIText) and `uniwind`."
+        },
+        {
+            "name": "hero-3",
+            "type": "registry:block",
+            "title": "Hero 3",
+            "description": "Marketing hero with heading, reviews row, CTAs, and side image (React Native + Uniwind).",
+            "categories": ["blocks", "marketing"],
+            "dependencies": [],
+            "registryDependencies": [],
+            "files": [
+                {
+                    "path": "src/blocks/marketing/hero3.tsx",
+                    "type": "registry:component"
+                },
+                {
+                    "path": "src/blocks/marketing/index.ts",
+                    "type": "registry:lib"
+                }
+            ],
+            "docs": "Uses `Avatar`, `Button`, `UIText`, `Linking.openURL` for button URLs. Remote SVG hero images may need a raster `imageUrl` on some platforms."
+        }
+    ]
+}

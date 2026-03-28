@@ -61,3 +61,6 @@ export interface SummaryPanelBlockProps extends BlockChromeProps {
 export interface SurfaceGridBlockProps extends BlockChromeProps {
     items: SurfaceItem[]
 }
+
+export type { ShoppingCartBlockProps, ShoppingCartItem } from './shopping-cart/types'
+export type { Hero3Props } from './marketing/hero3'

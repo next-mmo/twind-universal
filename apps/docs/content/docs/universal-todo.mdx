@@ -4,7 +4,22 @@ description: The shared demo flow that the web and native shells are meant to co
 icon: Route
 ---
 
-The universal todo demo is the clearest proof point in the repo. It is designed around a shared route tree and shared search state, with thin wrappers on top for browser history or native memory history.
+The universal todo demo is the clearest proof point in the repo. It is designed around a shared route tree and shared search state, with thin wrappers on top for browser history or native memory history. All feature code lives in **`packages/todo-universal`**; shell apps only mount the generated route tree and supply `TodoRouterContext` (see `App Shells`).
+
+## Package layout (`todo-universal`)
+
+| Path | Role |
+| --- | --- |
+| `routes/` | TanStack file routes (`__root.tsx`, `index.tsx`, `todo/$id/route.tsx`, `todo/stats/route.tsx`, …) |
+| `routes/-router/` | Typed helpers: search parsing, loader deps, stats API, route context |
+| `routes/-store/` | Todo model, `TodoContext`, persistence key, tests |
+| `routes/-platform/` | Storage facade (`storage.ts` / `storage.native.ts`) so route code never imports app-native modules directly |
+| `routes/-views/` | Shared list screen view |
+| `routes/-components/` | Todo list row, filters, tabs, input |
+| `routes/todo/$id/`, `routes/todo/stats/` | Route-level `route.tsx` plus `-view.tsx` for each flow |
+| `routes/-shells/` | `RootRouteShell` — web (document shell) vs `RootRouteShell.native` (RN-only) |
+
+Views and most UI use a **single** `*.tsx` module: `uniwind-router`’s `Link`, `ui/primitives`, and shared hooks work on web and native. Only **true** platform splits get separate files (shell HTML vs native root, storage).
 
 ## Route surface
 
@@ -74,6 +89,26 @@ export interface TodoRouterContext {
 
 That context feeds the stats route and gives the same route modules awareness of where they are running.
 
+## How the demo uses the `ui` package
+
+The shared todo screens compose the design system the same way app code should: **primitives** for layout and controls, **recipes** for card-style compositions, **blocks** for larger sections, and **UniWind** where the screen needs the runtime hook.
+
+```tsx
+// Layout and controls
+import { Pressable, ScrollView, Text, TextInput, View } from 'ui/primitives'
+
+// Marketing-style sections (stats flow)
+import { StatsBlock, SummaryPanelBlock } from 'ui/blocks'
+
+// Recipe-level card (list and detail)
+import { RecipeCard as Card } from 'ui/recipes'
+
+// Theme / UniWind runtime
+import { Uniwind, useUniwind } from 'ui/uniwind'
+```
+
+For a full breakdown of layers (reusables, registry, styling rules), see `UI package & design system`.
+
 ## Why this matters
 
 <Callout type="success" title="This is the real demo boundary">
@@ -85,4 +120,5 @@ The route modules are not meant to know whether they are inside TanStack Start, 
 <Cards>
   <Card title="App Shells" href="/docs/app-shells" />
   <Card title="Packages" href="/docs/packages" />
+  <Card title="UI package & design system" href="/docs/ui-design-system" />
 </Cards>

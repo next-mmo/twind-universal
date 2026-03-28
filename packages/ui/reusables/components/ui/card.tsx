@@ -1,77 +1,52 @@
-import { type ComponentProps, type ReactNode } from 'react'
-import { View } from 'uniwind/components'
-import { tv, type VariantProps } from 'tailwind-variants'
-import { cn } from '../../lib/utils'
-import { UIText } from './text'
+import { Text, TextClassContext } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
+import { View } from 'react-native';
 
-const cardVariants = tv({
-    base: 'rounded-[1.75rem] border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950',
-    variants: {
-        variant: {
-            default: '',
-            outline: 'bg-transparent shadow-none',
-            elevated: 'border-transparent shadow-lg',
-            ghost: 'border-transparent bg-transparent shadow-none',
-            transparent: 'border-transparent bg-transparent shadow-none',
-        },
-    },
-    defaultVariants: {
-        variant: 'default',
-    },
-})
-
-const cardHeaderVariants = tv({
-    base: 'flex-col gap-1.5 p-6',
-})
-
-const cardTitleVariants = tv({
-    base: 'text-2xl font-semibold leading-none tracking-tight text-zinc-950 dark:text-zinc-50',
-})
-
-const cardDescriptionVariants = tv({
-    base: 'text-sm text-zinc-500 dark:text-zinc-400',
-})
-
-const cardContentVariants = tv({
-    base: 'p-6 pt-0',
-})
-
-const cardFooterVariants = tv({
-    base: 'flex-row items-center gap-3 p-6 pt-0',
-})
-
-type CardVariants = VariantProps<typeof cardVariants>
-type CardProps = ComponentProps<typeof View> & CardVariants
-type CardSlotProps = ComponentProps<typeof View> & {
-    children?: ReactNode
-}
-type CardTextProps = ComponentProps<typeof UIText> & {
-    children?: ReactNode
+function Card({ className, ...props }: React.ComponentProps<typeof View>) {
+  return (
+    <TextClassContext.Provider value="text-card-foreground">
+      <View
+        className={cn(
+          'bg-card border-border flex flex-col gap-6 rounded-xl border py-6 shadow-sm shadow-black/5',
+          className
+        )}
+        {...props}
+      />
+    </TextClassContext.Provider>
+  );
 }
 
-function Card({ className, variant, ...props }: CardProps) {
-    return <View className={cn(cardVariants({ variant }), className)} {...props} />
+function CardHeader({ className, ...props }: React.ComponentProps<typeof View>) {
+  return <View className={cn('flex flex-col gap-1.5 px-6', className)} {...props} />;
 }
 
-function CardHeader({ className, ...props }: CardSlotProps) {
-    return <View className={cn(cardHeaderVariants(), className)} {...props} />
+function CardTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text>) {
+  return (
+    <Text
+      role="heading"
+      aria-level={3}
+      className={cn('font-semibold leading-none', className)}
+      {...props}
+    />
+  );
 }
 
-function CardTitle({ className, ...props }: CardTextProps) {
-    return <UIText className={cn(cardTitleVariants(), className)} {...props} />
+function CardDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof Text>) {
+  return <Text className={cn('text-muted-foreground text-sm', className)} {...props} />;
 }
 
-function CardDescription({ className, ...props }: CardTextProps) {
-    return <UIText className={cn(cardDescriptionVariants(), className)} {...props} />
+function CardContent({ className, ...props }: React.ComponentProps<typeof View>) {
+  return <View className={cn('px-6', className)} {...props} />;
 }
 
-function CardContent({ className, ...props }: CardSlotProps) {
-    return <View className={cn(cardContentVariants(), className)} {...props} />
+function CardFooter({ className, ...props }: React.ComponentProps<typeof View>) {
+  return <View className={cn('flex flex-row items-center px-6', className)} {...props} />;
 }
 
-function CardFooter({ className, ...props }: CardSlotProps) {
-    return <View className={cn(cardFooterVariants(), className)} {...props} />
-}
-
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cardVariants }
-export type { CardProps, CardSlotProps, CardTextProps, CardVariants }
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };

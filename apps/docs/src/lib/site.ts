@@ -24,6 +24,11 @@ export const siteConfig = {
             active: 'nested-url' as const,
         },
         {
+            text: 'UI & design system',
+            url: '/docs/ui-design-system',
+            active: 'nested-url' as const,
+        },
+        {
             text: 'Workspace Status',
             url: '/docs/workspace-status',
             active: 'nested-url' as const,

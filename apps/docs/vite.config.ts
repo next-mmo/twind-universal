@@ -44,7 +44,7 @@ export default defineConfig({
         tsconfigPaths: true,
         alias: {
             'react-native': 'react-native-web',
-            'ui/blocks': path.resolve(import.meta.dirname, '../../packages/ui/src/blocks/index.tsx'),
+            'ui/blocks': path.resolve(import.meta.dirname, '../../packages/ui/src/blocks/index.ts'),
             tslib: 'tslib/tslib.es6.js',
         },
     },

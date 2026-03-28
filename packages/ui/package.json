@@ -2,6 +2,9 @@
     "name": "ui",
     "version": "0.1.0",
     "private": true,
+    "scripts": {
+        "registry:build": "shadcn build registry/registry.json -o registry/public/r -c ."
+    },
     "main": "src/index.ts",
     "types": "src/index.ts",
     "exports": {
@@ -10,8 +13,8 @@
             "types": "./src/index.ts"
         },
         "./blocks": {
-            "import": "./src/blocks/index.tsx",
-            "types": "./src/blocks/index.tsx"
+            "import": "./src/blocks/index.ts",
+            "types": "./src/blocks/index.ts"
         },
         "./primitives": {
             "import": "./src/primitives.ts",
@@ -31,8 +34,35 @@
         }
     },
     "dependencies": {
-        "tailwind-variants": "^3.0.0",
+        "@rn-primitives/accordion": "^1.4.0",
+        "@rn-primitives/alert-dialog": "^1.4.0",
+        "@rn-primitives/aspect-ratio": "^1.4.0",
+        "@rn-primitives/avatar": "^1.4.0",
+        "@rn-primitives/checkbox": "^1.4.0",
+        "@rn-primitives/collapsible": "^1.4.0",
+        "@rn-primitives/context-menu": "^1.4.0",
+        "@rn-primitives/dialog": "^1.4.0",
+        "@rn-primitives/dropdown-menu": "^1.4.0",
+        "@rn-primitives/hover-card": "^1.4.0",
+        "@rn-primitives/label": "^1.4.0",
+        "@rn-primitives/menubar": "^1.4.0",
+        "@rn-primitives/popover": "^1.4.0",
+        "@rn-primitives/progress": "^1.4.0",
+        "@rn-primitives/radio-group": "^1.4.0",
+        "@rn-primitives/select": "^1.4.0",
+        "@rn-primitives/separator": "^1.4.0",
+        "@rn-primitives/slot": "^1.4.0",
+        "@rn-primitives/switch": "^1.4.0",
+        "@rn-primitives/tabs": "^1.4.0",
+        "@rn-primitives/toggle": "^1.4.0",
+        "@rn-primitives/toggle-group": "^1.4.0",
+        "@rn-primitives/tooltip": "^1.4.0",
+        "class-variance-authority": "^0.7.1",
+        "lucide-react-native": "^1.7.0",
+        "react-native-reanimated": "*",
+        "react-native-screens": "*",
         "tailwind-merge": "^3.5.0",
+        "tailwind-variants": "^3.0.0",
         "uniwind": "^1.5.0"
     },
     "peerDependencies": {
@@ -40,9 +70,10 @@
         "react-native": ">=0.76"
     },
     "devDependencies": {
-        "typescript": "^5.9.3",
         "@types/react": "catalog:",
         "react": "catalog:",
-        "react-native": "catalog:"
+        "react-native": "catalog:",
+        "shadcn": "^3.6.2",
+        "typescript": "^5.9.3"
     }
 }

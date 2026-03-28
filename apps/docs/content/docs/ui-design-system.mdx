@@ -1,0 +1,60 @@
+---
+title: UI package & design system
+description: How the shared `ui` package layers primitives, reusables, blocks, and recipes on UniWind for universal apps.
+icon: Layers
+---
+
+The `packages/ui` workspace package is the shared **React Native + UniWind** surface for this monorepo. Styling is **CSS-first UniWind** (Tailwind v4 tokens in `reusables/global.css`), not NativeWind. Consumers import through explicit subpath exports so tree-shaking and mental models stay clear.
+
+## Layer map
+
+| Layer | Export path | Role |
+| --- | --- | --- |
+| **Primitives** | `ui/primitives` | React Native primitives from `uniwind/components` (`View`, `ScrollView`, `Image`, `Text`, …) so `className` maps to UniWind everywhere. |
+| **Reusables** | `ui/reusables` | shadcn-style building blocks: `Button`, `UIText`, `Card`, `Badge`, `Avatar`, `Separator`, `Skeleton`, and variants. Built on primitives + `tailwind-merge` (`cn()` in `reusables/lib/utils.ts`). |
+| **Recipes** | `ui/recipes` | Higher-level compositions that bundle reusables into opinionated patterns (for example profile-style cards). |
+| **Blocks** | `ui/blocks` | Hand-authored marketing and product sections (hero, stats, shopping cart, and similar). Not Next.js server blocks—plain RN components for reuse in apps and docs. |
+| **UniWind helpers** | `ui/uniwind` | Package-level UniWind entry (`Uniwind`, `useUniwind`, etc.) for screens that need the runtime hook. |
+
+The root export `ui` re-exports everything and also exposes **namespaces** (`Blocks`, `Primitives`, `Recipes`, `Reusables`, `UniwindCore`) when you prefer explicit grouping.
+
+## Styling conventions
+
+- **Theme tokens** live in CSS (`@import "tailwindcss"`, `@import "uniwind"`, `@theme`, …). Do not assume a root `tailwind.config.js` in consumers.
+- **Utilities**: prefer `className` on UniWind-aware components; use `cn()` for conditional classes.
+- **Copy**: `UIText` with `variant` or `className`; muted copy often uses the zinc palette classes.
+- **Actions**: `Button` with **`onPress`**, not `onClick`. Children are often `UIText` so `TextClassContext` applies consistently.
+- **Targets**: this package aims at **React Native** (plus web via RN). Avoid `"use client"`, and avoid raw DOM tags (`div`, `span`, …) unless a surface is explicitly web-only.
+
+## Imports in app code
+
+Typical patterns (as used by the universal todo demo):
+
+```tsx
+import { Pressable, ScrollView, View } from 'ui/primitives'
+import { Button, UIText } from 'ui/reusables'
+import { StatsBlock } from 'ui/blocks'
+import { RecipeCard as Card } from 'ui/recipes'
+import { Uniwind, useUniwind } from 'ui/uniwind'
+```
+
+Use **primitives** for layout and platform building blocks, **reusables** for interactive and typographic primitives, **blocks** for full sections, and **recipes** when you want a packaged composition without hand-wiring every card slot.
+
+## shadcn-style registry
+
+The repo keeps a **shadcn-compatible registry** under `packages/ui/registry/`. Adding or changing registered components usually means updating the manifest and running the build in that package:
+
+```sh
+pnpm --filter ui run registry:build
+```
+
+Generated payloads land under `registry/public/r/` for CLI-style installs. See `packages/ui/components.json` for the RNR/shadcn workspace paths (Tailwind entry, aliases).
+
+## Official references
+
+<Cards>
+  <Card title="Packages overview" href="/docs/packages" />
+  <Card title="Universal Todo" href="/docs/universal-todo" />
+  <Card title="Uniwind" href="https://docs.uniwind.dev" />
+  <Card title="React Native Reusables" href="https://reactnativereusables.com/" />
+</Cards>

@@ -14,7 +14,8 @@
         "test:e2e": "playwright test",
         "test:todo-routes": "vitest run",
         "format": "biome check --fix",
-        "circular:check": "turbo circular:check"
+        "circular:check": "turbo circular:check",
+        "registry:build": "turbo run registry:build --filter ui"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.4.7",

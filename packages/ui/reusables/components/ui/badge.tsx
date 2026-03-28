@@ -1,53 +1,66 @@
-import { type ComponentProps, type ReactNode } from 'react'
-import { View } from 'uniwind/components'
-import { tv, type VariantProps } from 'tailwind-variants'
-import { cn } from '../../lib/utils'
-import { TextClassContext, UIText } from './text'
+import { TextClassContext } from '@/components/ui/text';
+import { cn } from '@/lib/utils';
+import * as Slot from '@rn-primitives/slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Platform, View } from 'react-native';
 
-const badgeVariants = tv({
-    base: 'self-start rounded-full px-3 py-1.5',
+const badgeVariants = cva(
+  cn(
+    'border-border group shrink-0 flex-row items-center justify-center gap-1 overflow-hidden rounded-full border px-2 py-0.5',
+    Platform.select({
+      web: 'focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive w-fit whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] [&>svg]:pointer-events-none [&>svg]:size-3',
+    })
+  ),
+  {
     variants: {
-        variant: {
-            default: 'bg-zinc-950 dark:bg-zinc-100',
-            secondary: 'bg-zinc-100 dark:bg-zinc-800',
-            outline: 'border border-zinc-200 bg-transparent dark:border-zinc-800',
-            accent: 'bg-indigo-500/12 dark:bg-indigo-400/18',
-        },
+      variant: {
+        default: cn(
+          'bg-primary border-transparent',
+          Platform.select({ web: '[a&]:hover:bg-primary/90' })
+        ),
+        secondary: cn(
+          'bg-secondary border-transparent',
+          Platform.select({ web: '[a&]:hover:bg-secondary/90' })
+        ),
+        destructive: cn(
+          'bg-destructive border-transparent',
+          Platform.select({ web: '[a&]:hover:bg-destructive/90' })
+        ),
+        outline: Platform.select({ web: '[a&]:hover:bg-accent [a&]:hover:text-accent-foreground' }),
+      },
     },
     defaultVariants: {
-        variant: 'default',
+      variant: 'default',
     },
-})
+  }
+);
 
-const badgeTextVariants = tv({
-    base: 'text-xs font-semibold uppercase tracking-[0.18em]',
-    variants: {
-        variant: {
-            default: 'text-white dark:text-zinc-950',
-            secondary: 'text-zinc-600 dark:text-zinc-300',
-            outline: 'text-zinc-600 dark:text-zinc-300',
-            accent: 'text-indigo-600 dark:text-indigo-300',
-        },
+const badgeTextVariants = cva('text-xs font-medium', {
+  variants: {
+    variant: {
+      default: 'text-primary-foreground',
+      secondary: 'text-secondary-foreground',
+      destructive: 'text-white',
+      outline: 'text-foreground',
     },
-    defaultVariants: {
-        variant: 'default',
-    },
-})
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
 
-type BadgeProps = ComponentProps<typeof View> &
-    VariantProps<typeof badgeVariants> & {
-        children?: ReactNode
-    }
+type BadgeProps = React.ComponentProps<typeof View> & {
+    asChild?: boolean;
+  } & VariantProps<typeof badgeVariants>;
 
-function Badge({ children, className, variant, ...props }: BadgeProps) {
-    return (
-        <TextClassContext.Provider value={badgeTextVariants({ variant })}>
-            <View className={cn(badgeVariants({ variant }), className)} {...props}>
-                {typeof children === 'string' || typeof children === 'number' ? <UIText>{children}</UIText> : children}
-            </View>
-        </TextClassContext.Provider>
-    )
+function Badge({ className, variant, asChild, ...props }: BadgeProps) {
+  const Component = asChild ? Slot.View : View;
+  return (
+    <TextClassContext.Provider value={badgeTextVariants({ variant })}>
+      <Component className={cn(badgeVariants({ variant }), className)} {...props} />
+    </TextClassContext.Provider>
+  );
 }
 
-export { Badge, badgeTextVariants, badgeVariants }
-export type { BadgeProps }
+export { Badge, badgeTextVariants, badgeVariants };
+export type { BadgeProps };

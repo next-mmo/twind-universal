@@ -18,7 +18,7 @@
         "paths": {
             "@/*": ["./src/*"],
             "collections/*": [".source/*"],
-            "ui/blocks": ["../../packages/ui/src/blocks/index.tsx"],
+            "ui/blocks": ["../../packages/ui/src/blocks/index.ts"],
             "ui": ["../../packages/ui/src/index.ts"],
             "ui/*": ["../../packages/ui/src/*"]
         },

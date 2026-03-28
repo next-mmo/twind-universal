@@ -12,7 +12,7 @@ The repo is easier to understand when each package has a sharp responsibility.
 | --- | --- |
 | `uniwind-router` | Platform-aware TanStack Router bridge with a native-friendly `Link` and history helpers |
 | `uniwind-router-tools` | Route generation and watch tooling for the shell apps |
-| `ui` | Shared React Native Reusables + Uniwind surface for primitives, recipes, and blocks |
+| `ui` | Shared React Native Reusables + Uniwind surface for primitives, reusables, recipes, and blocks ([details](/docs/ui-design-system)) |
 | `todo-universal` | Shared route modules, store, views, and styles for the universal todo demo |
 
 ## `uniwind-router`
@@ -25,12 +25,15 @@ This package is the key interoperability layer. The important idea is simple:
 
 ## `ui`
 
-`ui` now owns the shared UI surface the repo actually uses:
+`ui` owns the shared UI surface the repo actually uses:
 
-- repo-owned React Native Reusables style components
-- Uniwind utilities
-- native primitives without import collisions
-- shared composition blocks used in docs and app flows
+- **Primitives** — RN primitives from `uniwind/components` (`ui/primitives`)
+- **Reusables** — Button, UIText, Card, and related shadcn-style pieces (`ui/reusables`)
+- **Recipes** — higher-level card compositions (`ui/recipes`)
+- **Blocks** — marketing and product sections such as stats and hero layouts (`ui/blocks`)
+- **UniWind entry** — helpers for themed screens (`ui/uniwind`)
+
+See **[UI package & design system](/docs/ui-design-system)** for the layer table, styling conventions, import examples, and registry notes.
 
 ## `todo-universal`
 
