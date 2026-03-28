@@ -1,4 +1,5 @@
-import { Uniwind, useUniwind, Pressable, ScrollView, Text, TextInput, View } from 'uniwind-ui'
+import { Uniwind, useUniwind } from 'ui/uniwind'
+import { Pressable, ScrollView, Text, TextInput, View } from 'ui/primitives'
 import { Link } from 'uniwind-router'
 import { RouteFeatureTabs } from '../-components/RouteFeatureTabs'
 import { TodoFilter } from '../-components/TodoFilter'

@@ -1,10 +1,10 @@
 /**
- * Button — re-exported from call-ui
+ * Button — re-exported from ui
  *
  * Previously this imported from react-native directly.
- * Now uses the call-ui / uniwind component stack.
+ * Now uses the ui / uniwind component stack.
  */
-import { Pressable, Text } from 'call-ui'
+import { Pressable, Text } from 'ui/primitives'
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<typeof Pressable> {
     title: string

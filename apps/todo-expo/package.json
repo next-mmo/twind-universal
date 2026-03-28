@@ -19,6 +19,7 @@
         "react": "catalog:",
         "react-native": "catalog:",
         "tailwindcss": "catalog:",
+        "ui": "workspace:*",
         "uniwind": "^1.5.0",
         "uniwind-router": "workspace:*",
         "uniwind-ui": "workspace:*"

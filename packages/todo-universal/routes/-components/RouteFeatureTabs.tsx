@@ -1,5 +1,5 @@
 import { Link, useMatchRoute } from 'uniwind-router'
-import { Text, View } from 'uniwind-ui'
+import { Text, View } from 'ui/primitives'
 import type { TodoListSearch } from '../-router/search'
 import type { TodoStatsSearch } from '../-router/stats'
 

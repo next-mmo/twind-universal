@@ -12,7 +12,7 @@
     "dependencies": {
         "@gorhom/bottom-sheet": "*",
         "@tanstack/react-router": "^1.166.8",
-        "call-ui": "workspace:*",
+        "ui": "workspace:*",
         "heroui-native": "*",
         "react": "catalog:",
         "react-native": "catalog:",

@@ -101,7 +101,7 @@ function Home() {
                                     <MiniPill icon={BookOpenText} title="Fumadocs" copy="MDX content, page tree, search, and LLM output routes." />
                                     <MiniPill icon={AppWindow} title="TanStack" copy="Start, Router, loaders, and server functions underneath the docs UI." />
                                     <MiniPill icon={Blocks} title="Workspace" copy="Real packages, real shell apps, and current repo status notes." />
-                                    <MiniPill icon={Boxes} title="Packages" copy="Uniwind Router, Uniwind UI, call-ui, and more." />
+                                    <MiniPill icon={Boxes} title="Packages" copy="Uniwind Router, Uniwind UI, ui, and more." />
                                 </div>
                             </PanelCard>
                         </div>
@@ -171,7 +171,7 @@ function Home() {
                             icon={Boxes}
                             title="Packages"
                             subtitle="Library boundaries"
-                            body="See how `uniwind-router`, `uniwind-ui`, `call-ui`, and the todo workspace fit together."
+                            body="See how `uniwind-router`, `uniwind-ui`, `ui`, and the todo workspace fit together."
                             href="/docs/packages"
                         />
                         <SurfaceCard

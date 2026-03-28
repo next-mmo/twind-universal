@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from 'uniwind-ui'
+import { Pressable, Text, View } from 'ui/primitives'
 import type { TodoFilter as FilterType } from '../-store/types'
 
 interface Props {

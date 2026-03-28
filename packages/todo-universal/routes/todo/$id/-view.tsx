@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Card, Pressable, ScrollView, Text, TextInput, View } from 'uniwind-ui'
+import { RecipeCard as Card } from 'ui/recipes'
+import { Pressable, ScrollView, Text, TextInput, View } from 'ui/primitives'
 import { Link, useCanGoBack, useRouter } from 'uniwind-router'
 import { todoDetailRouteApi } from '../../-router/api'
 import { defaultTodoDetailSearch, pickTodoListSearch } from '../../-router/search'

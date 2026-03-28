@@ -18,7 +18,7 @@
  *   </Card>
  */
 import type { ReactNode } from 'react'
-import { View, Text } from 'uniwind/components'
+import { Text, View } from '../primitives'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 // ── Variants ──────────────────────────────────────────────────────────
@@ -31,6 +31,7 @@ const cardVariants = tv({
       outline: 'bg-transparent shadow-none',
       elevated: 'shadow-lg border-0',
       ghost: 'border-0 bg-transparent shadow-none',
+      transparent: 'border-0 bg-transparent shadow-none',
     },
   },
   defaultVariants: {
@@ -70,18 +71,19 @@ interface CardProps extends CardVariants {
 interface CardSubProps {
   className?: string
   children?: ReactNode
+  [key: string]: unknown
 }
 
 // ── Components ────────────────────────────────────────────────────────
 
-function Card({ className, variant, children, ...props }: CardProps) {
+function CardRoot({ className, variant, children, ...props }: CardProps) {
   return (
     <View className={cardVariants({ variant, className })} {...props}>
       {children}
     </View>
   )
 }
-Card.displayName = 'Card'
+CardRoot.displayName = 'Card'
 
 function CardHeader({ className, children, ...props }: CardSubProps) {
   return (
@@ -127,6 +129,14 @@ function CardFooter({ className, children, ...props }: CardSubProps) {
   )
 }
 CardFooter.displayName = 'CardFooter'
+
+const Card = Object.assign(CardRoot, {
+  Header: CardHeader,
+  Body: CardContent,
+  Footer: CardFooter,
+  Title: CardTitle,
+  Description: CardDescription,
+})
 
 export {
   Card,

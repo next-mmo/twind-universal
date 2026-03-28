@@ -12,7 +12,10 @@
             "@todo-universal/*": ["../../packages/todo-universal/*"],
             "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"],
             "uniwind-router": ["../../packages/uniwind-router/src/index.native.ts"],
-            "uniwind-ui": ["../../packages/uniwind-ui/src/index.ts"]
+            "ui": ["../../packages/ui/src/index.ts"],
+            "ui/*": ["../../packages/ui/src/*"],
+            "uniwind-ui": ["../../packages/uniwind-ui/src/index.ts"],
+            "uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
         }
     },
     "include": ["src", "index.js"]

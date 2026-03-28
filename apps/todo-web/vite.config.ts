@@ -80,7 +80,7 @@ const RN_NATIVE_ONLY_PACKAGES = [
  * Handles module resolution for workspace packages and React Native
  * compatibility in web builds:
  *
- * 1. Resolves `uniwind-ui` and `uniwind-router` from the app's node_modules
+ * 1. Resolves `uniwind-ui`, `ui`, and `uniwind-router` from the app's node_modules
  *    since `packages/todo-universal` doesn't have its own package resolution chain.
  *
  * 2. Redirects `react-native` to a virtual module that re-exports react-native-web
@@ -93,11 +93,21 @@ function resolveWorkspaceDeps(): Plugin {
   const pkgDir = import.meta.dirname;
   const resolveMap: Record<string, string> = {
     "uniwind-ui": path.resolve(pkgDir, "node_modules/uniwind-ui/src/index.ts"),
-    "call-ui": path.resolve(pkgDir, "node_modules/call-ui/src/index.ts"),
-    "uniwind-router": path.resolve(
-      pkgDir,
-      "node_modules/uniwind-router/dist/module/index.web.js",
-    ),
+    ui: path.resolve(pkgDir, "node_modules/ui/src/index.ts"),
+    "uniwind-router": path.resolve(pkgDir, "node_modules/uniwind-router/src/index.web.ts"),
+  };
+
+  const resolveWorkspaceSubpath = (id: string): string | null => {
+    if (!id.startsWith("ui/")) return null;
+
+    const subpath = id.slice("ui/".length);
+    const base = path.resolve(pkgDir, "node_modules/ui/src", subpath);
+    for (const ext of [".ts", ".tsx", "/index.ts", "/index.tsx"]) {
+      const candidate = base + ext;
+      if (fs.existsSync(candidate)) return candidate;
+    }
+
+    return null;
   };
 
   const rnLibrariesRE = /^react-native(?:-web)?\/Libraries\//;
@@ -257,6 +267,10 @@ export default {};
       if (id in resolveMap) {
         return resolveMap[id];
       }
+      const workspaceSubpath = resolveWorkspaceSubpath(id);
+      if (workspaceSubpath) {
+        return workspaceSubpath;
+      }
       if (id === "react-native") {
         return RN_VIRTUAL;
       }
@@ -278,6 +292,17 @@ export default {};
       }
     },
     load(id, options) {
+      if (
+        options?.ssr &&
+        /\/node_modules\/uniwind\/(?:dist\/module\/components\/web\/index\.js|src\/components\/web\/index\.ts)$/.test(
+          id,
+        )
+      ) {
+        return fs
+          .readFileSync(id, "utf-8")
+          .replace(/export \* from ['"]react-native['"];?/, "export * from 'react-native-web';");
+      }
+
       if (id === RN_VIRTUAL) return options?.ssr ? RN_SSR_CODE : RN_CLIENT_CODE;
       if (!id.startsWith(STUB_PREFIX)) return;
 
@@ -528,7 +553,7 @@ export default defineConfig(({ mode }) => ({
     noExternal: [
       "heroui-native",
       "uniwind-ui",
-      "call-ui",
+      "ui",
       "uniwind",
       "tailwind-variants",
       ...RN_NATIVE_ONLY_PACKAGES,

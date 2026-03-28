@@ -1,4 +1,5 @@
-import { Card, Pressable, ScrollView, Text, View } from 'uniwind-ui'
+import { RecipeCard as Card } from 'ui/recipes'
+import { Pressable, ScrollView, Text, View } from 'ui/primitives'
 import { useLocation } from 'uniwind-router'
 import { RouteFeatureTabs } from '../../-components/RouteFeatureTabs'
 import { todoStatsRouteApi } from '../../-router/api'

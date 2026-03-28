@@ -15,7 +15,7 @@
  *     ]}
  *   />
  */
-import { View, Text, Image, Pressable } from 'uniwind/components'
+import { Image, Pressable, Text, View } from '../primitives'
 import { tv, type VariantProps } from 'tailwind-variants'
 import {
   Card,

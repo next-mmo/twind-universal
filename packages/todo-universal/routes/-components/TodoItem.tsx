@@ -1,4 +1,5 @@
-import { Card, Pressable, View } from 'uniwind-ui'
+import { RecipeCard as Card } from 'ui/recipes'
+import { Pressable, View } from 'ui/primitives'
 import { Link } from 'uniwind-router'
 import { todoListRouteApi } from '../-router/api'
 import { defaultTodoDetailSearch, pickTodoListSearch } from '../-router/search'

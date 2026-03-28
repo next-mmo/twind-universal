@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Pressable, Text, TextInput, View } from 'uniwind-ui'
+import { Pressable, Text, TextInput, View } from 'ui/primitives'
 
 interface Props {
     onAdd: (text: string) => void

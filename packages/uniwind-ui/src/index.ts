@@ -1,11 +1,15 @@
 /**
- * uniwind-ui — HeroUI Native component library re-export
+ * uniwind-ui — unified HeroUI Native + Uniwind surface
  *
- * This package provides a single import surface for HeroUI Native components
- * built on Uniwind (Tailwind CSS for React Native).
+ * This package provides:
+ * - top-level convenience exports for the common combined API
+ * - grouped namespaces for clearer consumption
+ * - subpath entry points when callers want only HeroUI, Uniwind core, or primitives
  *
  * Usage:
- *   import { Card, Button, TextField } from "uniwind-ui";
+ *   import { Card, HeroUI, UniwindCore, UniwindPrimitives } from "uniwind-ui";
+ *   import * as HeroUIOnly from "uniwind-ui/heroui";
+ *   import * as UniwindOnly from "uniwind-ui/uniwind";
  *
  * CSS Setup (in your app's global.css):
  *   @import "tailwindcss";
@@ -24,36 +28,12 @@
  *   </GestureHandlerRootView>
  */
 
-// Re-export all HeroUI Native components
-export type { VariantProps } from "tailwind-variants";
-// Re-export tailwind-variants for custom component authoring
-export { tv } from "tailwind-variants";
+export * from './heroui'
+export * from './primitives'
+export * from './uniwind'
 
-// Re-export uniwind core utilities
-export { Uniwind } from "uniwind";
-export { useUniwind, useCSSVariable, useResolveClassNames } from "uniwind";
-export { withUniwind } from "uniwind";
+export * as HeroUI from './heroui'
+export * as UniwindCore from './uniwind'
+export * as UniwindPrimitives from './primitives'
 
-// Re-export the native primitives we actually use without colliding with HeroUI names.
-export {
-    ActivityIndicator,
-    FlatList,
-    Image,
-    ImageBackground,
-    KeyboardAvoidingView,
-    Modal,
-    Pressable,
-    RefreshControl,
-    SafeAreaView,
-    ScrollView,
-    SectionList,
-    Text,
-    TextInput,
-    TouchableHighlight,
-    TouchableNativeFeedback,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View,
-    VirtualizedList,
-} from "uniwind/components";
-export * from "heroui-native";
+export { HeroUINativeProvider as UniwindUIProvider } from 'heroui-native'
