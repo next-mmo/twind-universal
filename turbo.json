@@ -1,0 +1,33 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "ui": "tui",
+    "tasks": {
+        "build": {
+            "cache": false,
+            "dependsOn": ["^build"]
+        },
+        "dev": {
+            "cache": false,
+            "interactive": true
+        },
+        "check:typescript": {},
+        "lint": {},
+        "//#check:format": {},
+        "circular:check": {},
+        "precommit": {
+            "dependsOn": ["lint", "check:typescript", "circular:check", "test:native", "test:web", "//#check:format"]
+        },
+        "test": {
+            "dependsOn": ["test:native", "test:web", "test:e2e"]
+        },
+        "test:native": {
+            "cache": false
+        },
+        "test:web": {
+            "cache": false
+        },
+        "test:e2e": {
+            "cache": false
+        }
+    }
+}

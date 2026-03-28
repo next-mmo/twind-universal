@@ -1,0 +1,10 @@
+# Metro
+.metro-health-check*
+.expo/
+
+# Uniwind generated
+src/uniwind.d.ts
+uniwind-types.d.ts
+
+# Node
+node_modules/

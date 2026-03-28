@@ -1,0 +1,65 @@
+name: Release APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag name (e.g. v1.0.0). If provided, creates a GitHub Release.'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.15.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build local packages
+        run: pnpm run build --filter=todo-bare...
+
+      - name: Build Android APK
+        working-directory: apps/todo-bare/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: apps/todo-bare/android/app/build/outputs/apk/release/app-release.apk
+
+      - name: Create GitHub Release
+        if: ${{ inputs.tag_name != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag_name }}
+          files: apps/todo-bare/android/app/build/outputs/apk/release/app-release.apk

@@ -1,0 +1,16 @@
+{
+    "expo": {
+        "name": "Todo Expo",
+        "slug": "todo-expo",
+        "version": "1.0.0",
+        "orientation": "default",
+        "userInterfaceStyle": "automatic",
+        "ios": {
+            "supportsTablet": true,
+            "userInterfaceStyle": "automatic"
+        },
+        "android": {
+            "userInterfaceStyle": "automatic"
+        }
+    }
+}

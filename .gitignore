@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+*.pem
+*.tsbuildinfo
+dist
+.turbo
+.tmp
+.claude
+.vscode
+.playwright-mcp
+.agents
+.agent

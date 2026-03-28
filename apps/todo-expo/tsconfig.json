@@ -1,0 +1,11 @@
+{
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+        "strict": true,
+        "moduleResolution": "bundler",
+        "paths": {
+            "@todo/*": ["../../packages/todo/src/*"],
+            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
+        }
+    }
+}

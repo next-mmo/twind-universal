@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "uniwind";
+
+/* Scan shared todo components for Tailwind class extraction */
+@source "../../../packages/todo/src";
+@source "../../../packages/uniwind-ui/src";
+
+@theme {
+    --color-primary: oklch(0.55 0.22 270);
+}

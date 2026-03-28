@@ -1,0 +1,35 @@
+{
+    "name": "uniwind-router",
+    "private": true,
+    "scripts": {
+        "prepare": "husky",
+        "build": "turbo build",
+        "check:typescript": "turbo check:typescript",
+        "dev": "turbo dev",
+        "lint": "biome check",
+        "lint:fix": "biome check --fix",
+        "check:format": "biome check",
+        "precommit": "turbo precommit",
+        "test": "turbo test",
+        "format": "biome check --fix",
+        "circular:check": "turbo circular:check"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.4.7",
+        "husky": "9.1.7",
+        "turbo": "2.8.16",
+        "typescript": "catalog:"
+    },
+    "packageManager": "pnpm@9.15.2",
+    "pnpm": {
+        "patchedDependencies": {
+            "react-native@0.83.2": "patches/react-native@0.83.2.patch"
+        },
+        "onlyBuiltDependencies": [
+            "@tailwindcss/oxide"
+        ],
+        "overrides": {
+            "lightningcss": "1.30.1"
+        }
+    }
+}

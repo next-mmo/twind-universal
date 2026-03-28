@@ -1,0 +1,29 @@
+{
+    "name": "todo-expo",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "private": true,
+    "scripts": {
+        "start": "expo start -c",
+        "dev": "expo start -c",
+        "android": "expo start --android",
+        "ios": "expo start --ios"
+    },
+    "dependencies": {
+        "@expo/metro-runtime": "55.0.6",
+        "@tanstack/react-router": "^1.166.8",
+        "expo": "catalog:",
+        "expo-status-bar": "55.0.4",
+        "react": "catalog:",
+        "react-native": "catalog:",
+        "tailwindcss": "catalog:",
+        "uniwind": "^1.5.0",
+        "uniwind-router": "workspace:*",
+        "uniwind-ui": "workspace:*"
+    },
+    "devDependencies": {
+        "@babel/core": "7.28.5",
+        "@types/react": "catalog:",
+        "typescript": "catalog:"
+    }
+}

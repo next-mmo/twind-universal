@@ -1,0 +1,20 @@
+/* uniwind-ui/styles.css
+ *
+ * Pre-configured CSS entry point for HeroUI Native.
+ * Import this in your app's global.css:
+ *
+ *   @import "uniwind-ui/styles";
+ *
+ * Or import each layer manually:
+ *
+ *   @import "tailwindcss";
+ *   @import "uniwind";
+ *   @import "heroui-native/styles";
+ *   @source "./node_modules/heroui-native/lib";
+ */
+
+@import "tailwindcss";
+@import "uniwind";
+@import "heroui-native/styles";
+
+@source "./node_modules/heroui-native/lib";

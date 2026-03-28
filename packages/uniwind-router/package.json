@@ -1,0 +1,66 @@
+{
+    "name": "uniwind-router",
+    "version": "0.0.1",
+    "description": "Universal router for React Native + Web — powered by TanStack Router",
+    "keywords": [
+        "react-native",
+        "web",
+        "router",
+        "tanstack",
+        "universal",
+        "cross-platform"
+    ],
+    "author": "Uniwind",
+    "license": "MIT",
+    "source": "src/index",
+    "main": "dist/common/index.js",
+    "module": "dist/module/index.js",
+    "types": "dist/module/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/module/index.d.ts",
+            "react-native": "./src/index.native.ts",
+            "import": "./dist/module/index.web.js",
+            "default": "./dist/common/index.web.js"
+        },
+        "./native": {
+            "types": "./dist/module/index.native.d.ts",
+            "default": "./src/index.native.ts"
+        },
+        "./web": {
+            "types": "./dist/module/index.web.d.ts",
+            "import": "./dist/module/index.web.js",
+            "default": "./dist/common/index.web.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "src",
+        "dist",
+        "readme.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "unbuild",
+        "dev": "unbuild --stub"
+    },
+    "dependencies": {
+        "@tanstack/react-router": "^1.120.0",
+        "@tanstack/history": "^1.115.0"
+    },
+    "peerDependencies": {
+        "react": ">=19.0.0",
+        "react-native": ">=0.81.0",
+        "uniwind": "^1.5.0"
+    },
+    "peerDependenciesMeta": {
+        "react-native": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@types/react": "catalog:",
+        "typescript": "catalog:",
+        "unbuild": "3.6.1"
+    }
+}
