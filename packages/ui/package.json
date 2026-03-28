@@ -10,8 +10,8 @@
             "types": "./src/index.ts"
         },
         "./blocks": {
-            "import": "./src/blocks.tsx",
-            "types": "./src/blocks.tsx"
+            "import": "./src/blocks/index.tsx",
+            "types": "./src/blocks/index.tsx"
         },
         "./primitives": {
             "import": "./src/primitives.ts",
