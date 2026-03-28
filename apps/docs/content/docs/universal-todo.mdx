@@ -1,0 +1,88 @@
+---
+title: Universal Todo
+description: The shared demo flow that the web and native shells are meant to consume.
+icon: Route
+---
+
+The universal todo demo is the clearest proof point in the repo. It is designed around a shared route tree and shared search state, with thin wrappers on top for browser history or native memory history.
+
+## Route surface
+
+```tsx
+createFileRoute('/')({
+  validateSearch: search => parseTodoListSearch(search),
+  search: { middlewares: todoListSearchMiddlewares as any },
+  component: TodoListScreen,
+})
+
+createFileRoute('/todo/$id')({
+  validateSearch: search => parseTodoDetailSearch(search),
+  search: { middlewares: todoDetailSearchMiddlewares as any },
+  component: TodoDetailScreen,
+})
+
+createFileRoute('/todo/stats')({
+  validateSearch: search => parseTodoStatsSearch(search),
+  beforeLoad: ({ context, search }) => buildTodoStatsRouteContext(search as TodoStatsSearch, context as TodoRouterContext),
+  loaderDeps: ({ search }) => createTodoStatsLoaderDeps(search as TodoStatsSearch),
+  loader: ({ context, deps }) => buildTodoStatsLoaderData(deps as TodoStatsLoaderDeps, context as TodoRouterContext),
+  component: TodoStatsScreen,
+})
+```
+
+## Typed search state
+
+The list, detail, and stats screens all use explicit search models instead of freeform query strings.
+
+```ts
+export interface TodoListSearch {
+  filter: TodoFilter
+  q: string
+  sort: TodoSort
+}
+
+export interface TodoDetailSearch {
+  filter: TodoFilter
+  panel: 'summary' | 'notes'
+  q: string
+  sort: TodoSort
+}
+
+export interface TodoStatsSearch extends TodoListSearch {
+  focus: 'all' | 'active' | 'completed'
+  view: 'summary' | 'raw'
+}
+```
+
+## Demo highlights
+
+- The list screen retains route search params instead of hiding filter state in local component state.
+- The detail screen demonstrates param usage plus a route-level `panel` switch.
+- The stats screen demonstrates loader deps, loader data, route context, and location-aware debug output.
+- The shared todo store persists to `localStorage` when it is available, but still renders safely in non-browser contexts.
+
+## Shared runtime context
+
+The route tree expects a small runtime context:
+
+```ts
+export interface TodoRouterContext {
+  appName: string
+  platform: 'web' | 'bare' | 'expo'
+}
+```
+
+That context feeds the stats route and gives the same route modules awareness of where they are running.
+
+## Why this matters
+
+<Callout type="success" title="This is the real demo boundary">
+The route modules are not meant to know whether they are inside TanStack Start, Expo, or bare React Native. The shell apps supply history and runtime wrappers; the shared todo package keeps the feature logic.
+</Callout>
+
+## Continue
+
+<Cards>
+  <Card title="App Shells" href="/docs/app-shells" />
+  <Card title="Packages" href="/docs/packages" />
+</Cards>

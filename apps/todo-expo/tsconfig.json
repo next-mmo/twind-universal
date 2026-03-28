@@ -3,9 +3,13 @@
     "compilerOptions": {
         "strict": true,
         "moduleResolution": "bundler",
+        "moduleSuffixes": [".native", ""],
         "paths": {
-            "@todo/*": ["../../packages/todo/src/*"],
-            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
+            "@todo/*": ["../../packages/todo-universal/*"],
+            "@todo-universal/*": ["../../packages/todo-universal/*"],
+            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"],
+            "uniwind-router": ["../../packages/uniwind-router/src/index.native.ts"],
+            "uniwind-ui": ["../../packages/uniwind-ui/src/index.ts"]
         }
     }
 }

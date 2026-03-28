@@ -1,30 +1,28 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { TodoProvider } from '@todo/features/todo/TodoContext'
-import { TodoDetailScreen } from '@todo/screens/TodoDetailScreen'
-import { TodoListScreen } from '@todo/screens/TodoListScreen'
+import { createMemoryHistory, createRouter, RouterProvider } from 'uniwind-router'
+import { routeTree } from './routeTree.gen'
 
-type RootStackParamList = {
-    TodoList: undefined
-    TodoDetail: { id: string }
+const router = createRouter({
+    context: {
+        appName: 'todo-bare',
+        platform: 'bare',
+    },
+    routeTree,
+    history: createMemoryHistory({ initialEntries: ['/'] }),
+})
+
+declare module '@tanstack/react-router' {
+    interface Register {
+        router: typeof router
+    }
 }
-
-const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function App() {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <SafeAreaProvider>
-                <TodoProvider>
-                    <NavigationContainer>
-                        <Stack.Navigator screenOptions={{ headerShown: false }}>
-                            <Stack.Screen name="TodoList" component={TodoListScreen} />
-                            <Stack.Screen name="TodoDetail" component={TodoDetailScreen} />
-                        </Stack.Navigator>
-                    </NavigationContainer>
-                </TodoProvider>
+                <RouterProvider router={router} />
             </SafeAreaProvider>
         </GestureHandlerRootView>
     )

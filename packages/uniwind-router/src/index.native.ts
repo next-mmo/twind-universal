@@ -28,19 +28,27 @@ export {
     createRoute,
     // Router creation
     createRouter,
+    getRouteApi,
     isNotFound,
     isRedirect,
     notFound,
     Outlet,
     // Route provider — works on native! No react-dom deps.
     RouterProvider,
+    retainSearchParams,
     // Navigation utilities
     redirect,
+    stripSearchParams,
+    useCanGoBack,
+    useLoaderData,
+    useLoaderDeps,
     useLocation,
     useMatch,
+    useMatchRoute,
     useNavigate,
     // Hooks (all pure React — no DOM deps)
     useParams,
+    useRouteContext,
     useRouter,
     useRouterState,
     useSearch,

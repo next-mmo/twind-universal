@@ -1,0 +1,62 @@
+---
+title: Getting Started
+description: The shortest path to running the docs app and understanding the current workspace layout.
+icon: Rocket
+---
+
+The workspace is a PNPM monorepo with TurboRepo at the root. The docs app now provides a stable place to explain the moving pieces even while parts of the demo app are mid-migration.
+
+## Install and run
+
+```sh
+pnpm install
+pnpm --filter docs dev
+```
+
+Build verification for the docs app:
+
+```sh
+pnpm --filter docs build
+```
+
+## Workspace map
+
+| Path | Purpose |
+| --- | --- |
+| `apps/docs` | Project documentation site built with TanStack Start and Fumadocs |
+| `apps/todo-web` | Web shell for the universal todo route tree |
+| `apps/todo-expo` | Expo shell for the same route tree |
+| `apps/todo-bare` | Bare React Native shell |
+| `packages/todo-universal` | Shared route and feature code for the todo demo |
+| `packages/uniwind-router` | Platform-aware bridge for TanStack Router |
+| `packages/uniwind-router-tools` | Route generation and watch tooling |
+| `packages/uniwind-ui` | Shared UI exports and provider surface |
+| `packages/call-ui` | Extra component workspace used by the repo |
+
+## Current reality
+
+<Callout type="warning" title="Rename gap">
+The repository still has several config and generated files pointing at `packages/todo`, while the actual shared todo source now lives in `packages/todo-universal`.
+</Callout>
+
+That shows up in these places today:
+
+- `apps/todo-web/src/routeTree.gen.ts`
+- `apps/todo-expo/src/routeTree.gen.ts`
+- `apps/todo-bare/src/routeTree.gen.ts`
+- `uniwind.routes.json`
+- shell app aliases in `tsconfig.json` and Metro config files
+
+## What works well right now
+
+- `apps/docs` can build independently.
+- The docs app reflects the current workspace shape.
+- The route and loader concepts behind the shared todo demo are documented even though the shell apps still need rename cleanup.
+
+## What to read next
+
+<Cards>
+  <Card title="Universal Todo" href="/docs/universal-todo" />
+  <Card title="App Shells" href="/docs/app-shells" />
+  <Card title="Workspace Status" href="/docs/workspace-status" />
+</Cards>

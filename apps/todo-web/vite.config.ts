@@ -81,7 +81,7 @@ const RN_NATIVE_ONLY_PACKAGES = [
  * compatibility in web builds:
  *
  * 1. Resolves `uniwind-ui` and `uniwind-router` from the app's node_modules
- *    since `packages/todo` doesn't have its own package resolution chain.
+ *    since `packages/todo-universal` doesn't have its own package resolution chain.
  *
  * 2. Redirects `react-native` to a virtual module that re-exports react-native-web
  *    and adds stubs for native-only APIs.
@@ -582,12 +582,16 @@ module.exports = new Proxy(NOOP, handler);
   plugins: [
     tailwindcss() as unknown as Plugin,
     uniwind({
-      cssEntryFile: "./src/styles/app.css",
+      cssEntryFile: "../../packages/todo-universal/styles/app.css",
     }),
     fixOptimizeDeps(),
     resolveWorkspaceDeps(),
     tsconfigPaths(),
-    tanstackStart(),
+    tanstackStart({
+      router: {
+        routesDirectory: "../../../packages/todo-universal/routes",
+      },
+    }),
     viteReact(),
   ],
 }));

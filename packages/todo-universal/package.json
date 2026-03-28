@@ -1,0 +1,9 @@
+{
+    "name": "todo-universal",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Shared TanStack route package for the universal todo demo",
+    "exports": {
+        "./styles": "./styles/app.css"
+    }
+}

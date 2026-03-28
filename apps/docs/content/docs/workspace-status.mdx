@@ -1,0 +1,47 @@
+---
+title: Workspace Status
+description: Notes on the current package rename gap and what it affects right now.
+icon: Wrench
+---
+
+This page documents the current repository state as it exists today, so the docs do not silently drift away from the codebase.
+
+## Current status
+
+The universal todo source is under:
+
+```text
+packages/todo-universal
+```
+
+Several generated files and app configs still point at:
+
+```text
+packages/todo
+```
+
+## What that breaks
+
+- `todo-web` build currently fails while TanStack route generation looks for `packages/todo/src/routes`.
+- Expo and bare React Native aliases still point at the old path.
+- `uniwind.routes.json` still targets the old route directory.
+- generated route trees in the shell apps still import from the old package path.
+
+## Why keep this in docs
+
+<Callout type="warn" title="Documentation should match the workspace">
+If the docs hide the rename gap, new contributors will waste time trying to understand whether their environment is wrong. This page keeps the current state explicit.
+</Callout>
+
+## Expected cleanup direction
+
+1. Update route generation config to point at `packages/todo-universal`.
+2. Regenerate the shell app route trees.
+3. Align `tsconfig` path aliases and Metro aliases with the same package name.
+4. Re-run the shell app builds once the path migration is complete.
+
+## What is already stable
+
+- `apps/docs` can describe the current architecture accurately.
+- The package boundaries are clear enough to document.
+- The universal todo route design is coherent even if the shell app configs still need path cleanup.

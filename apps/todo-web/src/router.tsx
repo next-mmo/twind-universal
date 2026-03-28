@@ -3,6 +3,10 @@ import { routeTree } from './routeTree.gen'
 
 export function getRouter() {
     const router = createRouter({
+        context: {
+            appName: 'todo-web',
+            platform: 'web',
+        },
         routeTree,
         scrollRestoration: true,
     })

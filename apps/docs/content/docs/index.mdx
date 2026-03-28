@@ -1,31 +1,52 @@
 ---
-title: Hello World
-description: Your favourite docs framework.
-icon: Rocket
+title: Overview
+description: Start here for the architecture, stack, and demo surface behind the Uniwind universal workspace.
+icon: BookOpen
 ---
 
-Hey there! Fumadocs is the docs framework that also works on Tanstack Start!
+This documentation app is the project hub for the current workspace. It is built with TanStack Start, TanStack Router, Fumadocs MDX, and Fumadocs search, but the content is focused on the code that actually exists in this repository.
 
-## Heading
+<Callout type="info" title="What this site covers">
+The main demo surface is the shared universal todo flow in `packages/todo-universal`, plus the shell apps and packages around it.
+</Callout>
 
-Hello World!
+## What ships in the docs app
 
 <Cards>
-  <Card title="Learn more about Tanstack Start" href="https://tanstack.com/start" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+  <Card title="Getting Started" href="/docs/getting-started" />
+  <Card title="Universal Todo" href="/docs/universal-todo" />
+  <Card title="App Shells" href="/docs/app-shells" />
+  <Card title="Packages" href="/docs/packages" />
 </Cards>
 
-### CodeBlock
+- A custom landing page at `/` that acts like the product/demo entrypoint.
+- Search via `/api/search`.
+- LLM-friendly text exports via `/llms.txt`, `/llms-full.txt`, and `/llms.mdx/docs/*`.
+- A docs tree that explains the current repository shape instead of generic starter content.
 
-```ts
-console.log('Hello World');
-```
+## Core stack
 
-#### Table
+| Layer | Role in this app |
+| --- | --- |
+| `@tanstack/react-start` | SSR-capable app shell and route runtime |
+| `@tanstack/react-router` | File routes, loaders, server handlers, and navigation |
+| `fumadocs-mdx` | Content pipeline for the docs tree |
+| `fumadocs-ui` | Layouts, search UI, page tree, and doc page primitives |
+| `lucide-react` | Icons used by the docs surface and MDX pages |
 
-| Head                            | Description                         |
-| ------------------------------- | ----------------------------------- |
-| `hello`                         | Hello World                         |
-| very **important**              | Hey                                 |
-| _Surprisingly_                  | Fumadocs                            |
-| very long text that looks weird | hello world hello world hello world |
+## Official references
+
+<Cards>
+  <Card title="TanStack Start" href="https://tanstack.com/start/latest" />
+  <Card title="TanStack Router" href="https://tanstack.com/router/latest" />
+  <Card title="Fumadocs" href="https://fumadocs.dev" />
+  <Card title="Uniwind" href="https://docs.uniwind.dev" />
+</Cards>
+
+## Read in this order
+
+1. `Getting Started` for commands and repo layout.
+2. `Universal Todo` for the shared route behavior.
+3. `App Shells` for the thin web and native wrappers.
+4. `Packages` for the library boundaries and responsibilities.
+5. `Workspace Status` if you need the current migration gap documented.

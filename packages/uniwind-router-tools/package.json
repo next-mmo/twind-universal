@@ -1,0 +1,27 @@
+{
+    "name": "uniwind-router-tools",
+    "version": "0.0.1",
+    "private": true,
+    "description": "CLI tooling for generating and watching shared TanStack Router trees in Uniwind apps",
+    "bin": {
+        "uniwind-route-watch": "./bin/uniwind-route-watch.mjs"
+    },
+    "main": "./src/cli.ts",
+    "files": [
+        "bin",
+        "src",
+        "README.md",
+        "tsconfig.json"
+    ],
+    "engines": {
+        "node": ">=20"
+    },
+    "dependencies": {
+        "@tanstack/router-generator": "^1.166.9",
+        "tsx": "^4.20.6"
+    },
+    "devDependencies": {
+        "@types/node": "24.10.1",
+        "typescript": "catalog:"
+    }
+}

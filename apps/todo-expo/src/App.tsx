@@ -1,9 +1,13 @@
 import './global.css'
-import { routeTree } from '@todo/routes'
+import { routeTree } from './routeTree.gen'
 import { createMemoryHistory, createRouter, RouterProvider } from 'uniwind-router'
 
 // Memory history for React Native (no browser URL bar)
 const router = createRouter({
+    context: {
+        appName: 'todo-expo',
+        platform: 'expo',
+    },
     routeTree,
     history: createMemoryHistory({ initialEntries: ['/'] }),
 })

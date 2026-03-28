@@ -2,7 +2,7 @@
 @import "uniwind";
 
 /* Scan shared todo components for Tailwind class extraction */
-@source "../../../packages/todo/src";
+@source "../../../packages/todo-universal";
 @source "../../../packages/uniwind-ui/src";
 
 @theme {

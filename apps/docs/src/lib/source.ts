@@ -1,11 +1,11 @@
-import { docs } from 'collections/server'
 import { type InferPageType, loader } from 'fumadocs-core/source'
-import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons'
+import { create, docs } from '../../source.generated'
+
+const docsSource = await create.sourceAsync(docs.doc, docs.meta)
 
 export const source = loader({
-    source: docs.toFumadocsSource(),
+    source: docsSource,
     baseUrl: '/docs',
-    plugins: [lucideIconsPlugin()],
 })
 
 export async function getLLMText(page: InferPageType<typeof source>) {
@@ -14,4 +14,10 @@ export async function getLLMText(page: InferPageType<typeof source>) {
     return `# ${page.data.title}
 
 ${processed}`
+}
+
+export function getLLMIndexText() {
+    const lines = source.getPages().map(page => `- ${page.data.title ?? page.url}: ${page.url}`)
+
+    return ['# Uniwind Universal Docs', '', ...lines].join('\n')
 }

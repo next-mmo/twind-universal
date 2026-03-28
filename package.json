@@ -11,6 +11,7 @@
         "check:format": "biome check",
         "precommit": "turbo precommit",
         "test": "turbo test",
+        "test:todo-routes": "vitest run",
         "format": "biome check --fix",
         "circular:check": "turbo circular:check"
     },
@@ -18,7 +19,8 @@
         "@biomejs/biome": "^2.4.7",
         "husky": "9.1.7",
         "turbo": "2.8.16",
-        "typescript": "catalog:"
+        "typescript": "catalog:",
+        "vitest": "^4.1.2"
     },
     "packageManager": "pnpm@9.15.2",
     "pnpm": {

@@ -5,7 +5,8 @@ const path = require('path')
 const projectRoot = __dirname
 const workspaceRoot = path.resolve(projectRoot, '../..')
 const aliasRoots = {
-    '@todo': path.join(workspaceRoot, 'packages/todo/src'),
+    '@todo': path.join(workspaceRoot, 'packages/todo-universal'),
+    '@todo-universal': path.join(workspaceRoot, 'packages/todo-universal'),
     '@uniwind-ui': path.join(workspaceRoot, 'packages/uniwind-ui/src'),
 }
 
@@ -30,7 +31,7 @@ function resolveWorkspaceAlias(moduleName) {
 const config = {
     watchFolders: [
         path.join(workspaceRoot, 'packages/uniwind-router'),
-        path.join(workspaceRoot, 'packages/todo/src'),
+        path.join(workspaceRoot, 'packages/todo-universal'),
         path.join(workspaceRoot, 'packages/uniwind-ui'),
         path.join(workspaceRoot, 'node_modules'),
     ],

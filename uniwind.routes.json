@@ -1,0 +1,13 @@
+{
+    "routesDirectory": "packages/todo-universal/routes",
+    "targets": {
+        "todo-bare": {
+            "appRoot": "apps/todo-bare",
+            "generatedRouteTree": "src/routeTree.gen.ts"
+        },
+        "todo-expo": {
+            "appRoot": "apps/todo-expo",
+            "generatedRouteTree": "src/routeTree.gen.ts"
+        }
+    }
+}

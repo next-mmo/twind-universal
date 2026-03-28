@@ -1,0 +1,53 @@
+---
+title: Packages
+description: The current package boundaries behind the universal workspace.
+icon: Package
+---
+
+The repo is easier to understand when each package has a sharp responsibility.
+
+## Package map
+
+| Package | Responsibility |
+| --- | --- |
+| `uniwind-router` | Platform-aware TanStack Router bridge with a native-friendly `Link` and history helpers |
+| `uniwind-router-tools` | Route generation and watch tooling for the shell apps |
+| `uniwind-ui` | Shared provider surface and component exports built around Uniwind and HeroUI Native |
+| `call-ui` | Additional component workspace used by the repo |
+| `todo-universal` | Shared route modules, store, views, and styles for the universal todo demo |
+
+## `uniwind-router`
+
+This package is the key interoperability layer. The important idea is simple:
+
+- Web can keep browser-native link behavior.
+- Native can map navigation onto `Pressable` and memory history.
+- The rest of TanStack Router stays shared.
+
+## `uniwind-ui`
+
+`uniwind-ui` re-exports the shared UI surface the repo actually uses:
+
+- HeroUI Native components
+- Uniwind utilities
+- native primitives without import collisions
+
+That makes it a practical import boundary for the todo views and route shells.
+
+## `todo-universal`
+
+This is the package the docs spend the most time on because it is where the real product demo lives:
+
+- route definitions
+- route search parsing
+- route loaders and route context helpers
+- todo store and stateful feature logic
+- view components for list, detail, and stats flows
+
+## Supporting links
+
+<Cards>
+  <Card title="Uniwind Router README" href="https://github.com/next-mmo/twind-universal/blob/main/packages/uniwind-router/readme.md" />
+  <Card title="Uniwind Docs" href="https://docs.uniwind.dev" />
+  <Card title="TanStack Router" href="https://tanstack.com/router/latest" />
+</Cards>

@@ -4,10 +4,12 @@
     "main": "index.ts",
     "private": true,
     "scripts": {
-        "start": "expo start -c",
-        "dev": "expo start -c",
-        "android": "expo start --android",
-        "ios": "expo start --ios"
+        "start": "uniwind-route-watch watch --target todo-expo -- expo start -c",
+        "dev": "uniwind-route-watch watch --target todo-expo -- expo start -c",
+        "android": "uniwind-route-watch watch --target todo-expo -- expo start --android",
+        "ios": "uniwind-route-watch watch --target todo-expo -- expo start --ios",
+        "routes:generate": "uniwind-route-watch generate --target todo-expo",
+        "routes:watch": "uniwind-route-watch watch --target todo-expo"
     },
     "dependencies": {
         "@expo/metro-runtime": "55.0.6",
@@ -24,6 +26,7 @@
     "devDependencies": {
         "@babel/core": "7.28.5",
         "@types/react": "catalog:",
+        "uniwind-router-tools": "workspace:*",
         "typescript": "catalog:"
     }
 }

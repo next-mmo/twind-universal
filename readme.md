@@ -25,11 +25,11 @@ This monorepo is managed with **PNPM** workspaces and **TurboRepo**.
 ### Packages (`packages/`)
 
 - `packages/uniwind-router`: A bridge that brings the power of TanStack Router (and TanStack History) to React Native, seamlessly handling native navigation.
-- `packages/todo`: The universally shared logic, routes, and UI components for our Todo application. **All platform apps consume this package directly without any platform-specific code inside.**
+- `packages/todo-universal`: A route-first TanStack package that owns the shared Todo route tree, route support modules, and platform views for web and native shells.
 
 ### Applications (`apps/`)
 
-All apps are thin shells that simply mount the universal entrypoint from the `todo` package.
+All apps are thin shells that simply mount the generated route tree from the `todo-universal` package.
 
 - `apps/todo-bare`: A standard **React Native (CLI)** application.
 - `apps/todo-expo`: An **Expo**-based React Native application.
@@ -37,7 +37,7 @@ All apps are thin shells that simply mount the universal entrypoint from the `to
 
 ## ✨ Key Features
 
-- **Write Once, Run Everywhere**: Truly universal architecture with zero platform-specific split inside feature code.
+- **Write Once, Route Everywhere**: One shared TanStack route tree powers web, bare React Native, and Expo, with platform-specific views only where the runtime actually differs.
 - **Universal Routing**: Define your routes and navigation state once with TanStack Router. `uniwind-router` adapts them for React Native inherently.
 - **Universal Styling**: Powered by Uniwind, achieving fast, build-time-computed Tailwind bindings across both React Native CSS interop and standard Web CSS.
 - **Modern Monorepo Stack**: Configured with PNPM, TurboRepo, TypeScript standard aliases, and isolated testing setups.

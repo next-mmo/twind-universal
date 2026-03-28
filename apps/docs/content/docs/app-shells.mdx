@@ -1,0 +1,59 @@
+---
+title: App Shells
+description: How the web, Expo, and bare React Native apps wrap the shared universal todo route tree.
+icon: Smartphone
+---
+
+The shell apps are intentionally thin. Their job is to mount the route tree, provide runtime-specific wrappers, and keep platform setup away from the shared feature package.
+
+## Shell responsibilities
+
+| App | Runtime | Responsibility |
+| --- | --- | --- |
+| `apps/todo-web` | TanStack Start | Browser history, SSR entrypoint, and web-only bundler setup |
+| `apps/todo-expo` | Expo | Memory history and Expo runtime boot |
+| `apps/todo-bare` | React Native CLI | Memory history plus gesture and safe-area wrappers |
+| `apps/docs` | TanStack Start + Fumadocs | Documentation, search, and architecture reference |
+
+## Web shell pattern
+
+```tsx
+export function getRouter() {
+  const router = createRouter({
+    context: {
+      appName: 'todo-web',
+      platform: 'web',
+    },
+    routeTree,
+    scrollRestoration: true,
+  })
+
+  return router
+}
+```
+
+## Native shell pattern
+
+```tsx
+const router = createRouter({
+  context: {
+    appName: 'todo-expo',
+    platform: 'expo',
+  },
+  routeTree,
+  history: createMemoryHistory({ initialEntries: ['/'] }),
+})
+```
+
+The bare React Native shell follows the same pattern, then wraps the app in gesture and safe-area providers.
+
+## Why the split works
+
+- Browser history stays on web.
+- Memory history stays on native.
+- Route modules still read the same params, search state, loader data, and route context.
+- Platform-only providers stay out of the shared todo feature code.
+
+## Docs app role
+
+This docs app is not one of the todo shells. It exists to explain the stack around them and provide a stable reference even while the workspace is evolving.

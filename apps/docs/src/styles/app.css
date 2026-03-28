@@ -1,3 +1,29 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+
+:root {
+    --uw-bg-light: #f8fafc;
+    --uw-bg-dark: #020617;
+    --uw-ink-light: #0f172a;
+    --uw-ink-dark: #f8fafc;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+    background-color: var(--uw-bg-light);
+    color: var(--uw-ink-light);
+}
+
+html.dark body {
+    background-color: var(--uw-bg-dark);
+    color: var(--uw-ink-dark);
+}
+
+::selection {
+    background: rgba(20, 184, 166, 0.28);
+}

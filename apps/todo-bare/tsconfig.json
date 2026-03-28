@@ -3,12 +3,16 @@
         "target": "ES2022",
         "module": "ESNext",
         "moduleResolution": "bundler",
+        "moduleSuffixes": [".native", ""],
         "jsx": "react-jsx",
         "strict": true,
         "skipLibCheck": true,
         "paths": {
-            "@todo/*": ["../../packages/todo/src/*"],
-            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"]
+            "@todo/*": ["../../packages/todo-universal/*"],
+            "@todo-universal/*": ["../../packages/todo-universal/*"],
+            "@uniwind-ui/*": ["../../packages/uniwind-ui/src/*"],
+            "uniwind-router": ["../../packages/uniwind-router/src/index.native.ts"],
+            "uniwind-ui": ["../../packages/uniwind-ui/src/index.ts"]
         }
     },
     "include": ["src", "index.js"]
