@@ -537,6 +537,13 @@ export default {};
 
 // @ts-ignore - vite version mismatch between @tailwindcss/vite and project
 export default defineConfig(({ mode }) => ({
+  resolve: {
+    alias: {
+      // lucide-react-native@1.7.0 ships a broken barrel (exports LucideProvider from context.js but file omits it).
+      // Web uses DOM SVG via lucide-react; icon names match.
+      "lucide-react-native": "lucide-react",
+    },
+  },
   server: {
     port: 3001,
   },
@@ -558,6 +565,8 @@ export default defineConfig(({ mode }) => ({
   optimizeDeps: {
     include: ["invariant", "nullthrows"],
     esbuildOptions: {
+      // @rn-primitives ships JSX inside .js/.mjs; esbuild defaults break dep scan.
+      loader: { ".js": "jsx", ".mjs": "jsx" },
       plugins: [
         {
           name: "stub-rn-native",
