@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { blocksSearchMiddlewares, parseBlocksSearch } from '../-router/blocks'
 import { BlocksView } from '../-views/BlocksView'
 
-export const Route = createFileRoute('/blocks')({
+export const Route = createFileRoute('/blocks' as any)({
     ssr: false,
     validateSearch: search => parseBlocksSearch(search),
     search: {
