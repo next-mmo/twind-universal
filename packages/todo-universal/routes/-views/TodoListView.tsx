@@ -9,7 +9,7 @@ import { useLayoutInsets } from '../-hooks/useLayoutInsets'
 import { todoListRouteApi } from '../-router/api'
 import type { TodoListSearch, TodoSort } from '../-router/search'
 import { defaultTodoListSearch, filterAndSortTodos } from '../-router/search'
-import { defaultTodoStatsSearch } from '../-router/stats'
+import { defaultBlocksSearch } from '../-router/blocks'
 import { useTodos } from '../-store/TodoContext'
 
 const sortOptions: Array<{ key: TodoSort; label: string }> = [
@@ -25,7 +25,7 @@ export function TodoListView() {
     const search = todoListRouteApi.useSearch()
     const { todos, addTodo, toggleTodo, clearCompleted, resetDemo, stats, storageMode } = useTodos()
     const visibleTodos = filterAndSortTodos(todos, search)
-    const statsSearch = { ...defaultTodoStatsSearch, ...search }
+
 
     const updateSearch = (patch: Partial<TodoListSearch>) => {
         navigate({
@@ -45,7 +45,7 @@ export function TodoListView() {
             </View>
 
             <View className="bg-indigo-500">
-                <RouteFeatureTabs listSearch={search} statsSearch={statsSearch} />
+                <RouteFeatureTabs listSearch={search} />
             </View>
 
             <TodoInput onAdd={addTodo} />
@@ -82,8 +82,8 @@ export function TodoListView() {
                     <Link to="/" search={{ filter: 'completed', q: '', sort: 'alpha' }}>
                         <Text className="text-indigo-500 text-sm font-medium">Completed A-Z</Text>
                     </Link>
-                    <Link to="/todo/stats" search={{ ...statsSearch, focus: search.filter, view: 'summary' }}>
-                        <Text className="text-indigo-500 text-sm font-medium">Loader stats</Text>
+                    <Link to="/blocks" search={defaultBlocksSearch as any}>
+                        <Text className="text-indigo-500 text-sm font-medium">Browse blocks</Text>
                     </Link>
                     <Link to="/" search={defaultTodoListSearch as any}>
                         <Text className="text-zinc-500 dark:text-zinc-400 text-sm">Reset route state</Text>

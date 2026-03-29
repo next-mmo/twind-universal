@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './../../../packages/todo-universal/routes/__root'
+import { Route as BlocksRouteRouteImport } from './../../../packages/todo-universal/routes/blocks/route'
 import { Route as IndexRouteImport } from './../../../packages/todo-universal/routes/index'
 import { Route as TodoStatsRouteRouteImport } from './../../../packages/todo-universal/routes/todo/stats/route'
 import { Route as TodoIdRouteRouteImport } from './../../../packages/todo-universal/routes/todo/$id/route'
 
+const BlocksRouteRoute = BlocksRouteRouteImport.update({
+  id: '/blocks',
+  path: '/blocks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const TodoIdRouteRoute = TodoIdRouteRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blocks': typeof BlocksRouteRoute
   '/todo/$id': typeof TodoIdRouteRoute
   '/todo/stats': typeof TodoStatsRouteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blocks': typeof BlocksRouteRoute
   '/todo/$id': typeof TodoIdRouteRoute
   '/todo/stats': typeof TodoStatsRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blocks': typeof BlocksRouteRoute
   '/todo/$id': typeof TodoIdRouteRoute
   '/todo/stats': typeof TodoStatsRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/todo/$id' | '/todo/stats'
+  fullPaths: '/' | '/blocks' | '/todo/$id' | '/todo/stats'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/todo/$id' | '/todo/stats'
-  id: '__root__' | '/' | '/todo/$id' | '/todo/stats'
+  to: '/' | '/blocks' | '/todo/$id' | '/todo/stats'
+  id: '__root__' | '/' | '/blocks' | '/todo/$id' | '/todo/stats'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlocksRouteRoute: typeof BlocksRouteRoute
   TodoIdRouteRoute: typeof TodoIdRouteRoute
   TodoStatsRouteRoute: typeof TodoStatsRouteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/blocks': {
+      id: '/blocks'
+      path: '/blocks'
+      fullPath: '/blocks'
+      preLoaderRoute: typeof BlocksRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlocksRouteRoute: BlocksRouteRoute,
   TodoIdRouteRoute: TodoIdRouteRoute,
   TodoStatsRouteRoute: TodoStatsRouteRoute,
 }
