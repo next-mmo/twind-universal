@@ -12,29 +12,25 @@ export type {
     NavigateOptions,
     RegisteredRouter,
 } from '@tanstack/react-router'
+
 // ── Core TanStack Router (all platform-agnostic) ──────────────────────
 export {
     createBrowserHistory,
-    // File route utilities (for TanStack Start)
     createFileRoute,
     createHashHistory,
     createLink,
-    // Memory history (useful for testing on web too)
     createMemoryHistory,
     createRootRoute,
     createRootRouteWithContext,
     createRoute,
-    // Router creation
     createRouter,
     getRouteApi,
     isNotFound,
     isRedirect,
     notFound,
     Outlet,
-    // Route provider
     RouterProvider,
     retainSearchParams,
-    // Navigation utilities
     redirect,
     stripSearchParams,
     useCanGoBack,
@@ -44,7 +40,6 @@ export {
     useMatch,
     useMatchRoute,
     useNavigate,
-    // Hooks (all pure React — no DOM deps)
     useParams,
     useRouteContext,
     useRouter,
@@ -52,10 +47,34 @@ export {
     useSearch,
 } from '@tanstack/react-router'
 
+// ── Web Link (renders <a> tag) ────────────────────────────────────────
+export { Link } from './web/Link'
+
+// ── Web AnimatedOutlet (CSS transitions) ──────────────────────────────
+export { AnimatedOutlet } from './web/AnimatedOutlet'
+
+// ── Universal hooks ───────────────────────────────────────────────────
+export { useFocusEffect, useIsFocused } from './shared/useFocusEffect'
+export { useNavigationDirection, detectDirection } from './shared/useNavigationDirection'
+
+// ── Drawer context (usable on web too) ────────────────────────────────
+export { useDrawer } from './shared/drawerContext'
+
 // ── Universal history helper ──────────────────────────────────────────
 export { createUniversalHistory } from './shared/history'
 
 // ── Types ─────────────────────────────────────────────────────────────
-export type { UniversalLinkProps } from './shared/types'
-// ── Web Link (renders <a> tag) ────────────────────────────────────────
-export { Link } from './web/Link'
+export type {
+    AnimatedOutletProps,
+    DeepLinkProviderProps,
+    DrawerContextValue,
+    DrawerItem,
+    DrawerLayoutProps,
+    GestureBackProps,
+    NavigationDirection,
+    ScreenStackProps,
+    TabBarProps,
+    TabItem,
+    TransitionPreset,
+    UniversalLinkProps,
+} from './shared/types'

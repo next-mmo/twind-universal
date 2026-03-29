@@ -1,7 +1,7 @@
 /**
  * uniwind-router — Native entry point (React Native)
  *
- * Re-exports TanStack Router with native-optimized Link (renders Pressable).
+ * Re-exports TanStack Router with native-optimized components.
  * This entry is resolved by Metro via the "react-native" conditional export.
  *
  * Important: RouterProvider and Matches from @tanstack/react-router have
@@ -16,27 +16,24 @@ export type {
     NavigateOptions,
     RegisteredRouter,
 } from '@tanstack/react-router'
+
 // ── Core TanStack Router (all platform-agnostic) ──────────────────────
 export {
     createBrowserHistory,
     createHashHistory,
     createLink,
-    // History
     createMemoryHistory,
     createRootRoute,
     createRootRouteWithContext,
     createRoute,
-    // Router creation
     createRouter,
     getRouteApi,
     isNotFound,
     isRedirect,
     notFound,
     Outlet,
-    // Route provider — works on native! No react-dom deps.
     RouterProvider,
     retainSearchParams,
-    // Navigation utilities
     redirect,
     stripSearchParams,
     useCanGoBack,
@@ -46,16 +43,58 @@ export {
     useMatch,
     useMatchRoute,
     useNavigate,
-    // Hooks (all pure React — no DOM deps)
     useParams,
     useRouteContext,
     useRouter,
     useRouterState,
     useSearch,
 } from '@tanstack/react-router'
+
 // ── Native Link (renders Pressable + router.navigate) ─────────────────
 export { Link } from './native/Link'
+
+// ── Animated Outlet (Reanimated entering/exiting) ─────────────────────
+export { AnimatedOutlet } from './native/AnimatedOutlet'
+
+// ── Android Back Handler ──────────────────────────────────────────────
+export { useBackHandler } from './native/useBackHandler'
+export type { UseBackHandlerOptions } from './native/useBackHandler'
+
+// ── Deep Linking ──────────────────────────────────────────────────────
+export { DeepLinkProvider, stripPrefixes } from './native/DeepLinkProvider'
+
+// ── Tab Navigator ─────────────────────────────────────────────────────
+export { TabBar, isTabActive } from './native/TabBar'
+
+// ── Drawer Navigator ──────────────────────────────────────────────────
+export { DrawerLayout } from './native/DrawerLayout'
+export { useDrawer } from './shared/drawerContext'
+
+// ── Gesture Back (swipe-from-edge) ────────────────────────────────────
+export { GestureBack } from './native/GestureBack'
+
+// ── Screen Stack (keep-alive transitions) ─────────────────────────────
+export { ScreenStack } from './native/ScreenStack'
+
+// ── Universal hooks ───────────────────────────────────────────────────
+export { useFocusEffect, useIsFocused } from './shared/useFocusEffect'
+export { useNavigationDirection, detectDirection } from './shared/useNavigationDirection'
+
 // ── Universal history helper ──────────────────────────────────────────
 export { createUniversalHistory } from './shared/history'
+
 // ── Types ─────────────────────────────────────────────────────────────
-export type { UniversalLinkProps } from './shared/types'
+export type {
+    AnimatedOutletProps,
+    DeepLinkProviderProps,
+    DrawerContextValue,
+    DrawerItem,
+    DrawerLayoutProps,
+    GestureBackProps,
+    NavigationDirection,
+    ScreenStackProps,
+    TabBarProps,
+    TabItem,
+    TransitionPreset,
+    UniversalLinkProps,
+} from './shared/types'

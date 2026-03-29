@@ -48,5 +48,5 @@ export default defineBuildConfig({
     ],
     outDir: 'dist',
     clean: true,
-    externals: ['react', 'react-native', 'uniwind', /@tanstack/],
+    externals: ['react', 'react-native', 'react-native-gesture-handler', 'react-native-reanimated', /@tanstack/],
 })

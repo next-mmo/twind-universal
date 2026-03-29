@@ -30,7 +30,7 @@ export function createUniversalHistory(options: CreateUniversalHistoryOptions = 
     }
 }
 
-function detectHistoryType(): HistoryType {
+export function detectHistoryType(): HistoryType {
     // Check for browser environment
     if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
         return 'browser'
