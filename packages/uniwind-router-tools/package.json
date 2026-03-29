@@ -1,8 +1,12 @@
 {
     "name": "uniwind-router-tools",
     "version": "0.0.1",
-    "private": true,
     "description": "CLI tooling for generating and watching shared TanStack Router trees in Uniwind apps",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/next-mmo/twind-universal.git",
+        "directory": "packages/uniwind-router-tools"
+    },
     "bin": {
         "uniwind-route-watch": "./bin/uniwind-route-watch.mjs"
     },
@@ -16,12 +20,16 @@
     "engines": {
         "node": ">=20"
     },
+    "scripts": {
+        "prepare": "node -e \"const fs=require('fs'); const p='./bin/uniwind-route-watch.mjs'; try { fs.chmodSync(p, 0o755); } catch(e) {}\"",
+        "test": "echo \"No tests configured\""
+    },
     "dependencies": {
         "@tanstack/router-generator": "^1.166.9",
         "tsx": "^4.20.6"
     },
     "devDependencies": {
         "@types/node": "24.10.1",
-        "typescript": "catalog:"
+        "typescript": "5.9.3"
     }
 }

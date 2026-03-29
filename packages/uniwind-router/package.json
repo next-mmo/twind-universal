@@ -2,6 +2,11 @@
     "name": "uniwind-router",
     "version": "0.1.0",
     "description": "Universal router for React Native + Web — powered by TanStack Router. Includes AnimatedOutlet, TabBar, DrawerLayout, GestureBack, ScreenStack, DeepLinking, BackHandler, and more.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/next-mmo/twind-universal.git",
+        "directory": "packages/uniwind-router"
+    },
     "keywords": [
         "react-native",
         "web",
@@ -43,6 +48,7 @@
         "LICENSE"
     ],
     "scripts": {
+        "prepare": "unbuild",
         "build": "unbuild",
         "dev": "unbuild --stub",
         "test": "vitest run",
@@ -72,11 +78,11 @@
     },
     "devDependencies": {
         "@testing-library/react": "^16.3.0",
-        "@types/react": "catalog:",
+        "@types/react": "19.2.4",
         "jsdom": "^26.1.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
-        "typescript": "catalog:",
+        "typescript": "5.9.3",
         "unbuild": "3.6.1",
         "vitest": "^3.1.1"
     }

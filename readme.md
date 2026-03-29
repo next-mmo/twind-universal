@@ -82,7 +82,90 @@ If you are looking for documentation regarding the core `uniwind` package:
 - [Supported classNames](https://docs.uniwind.dev/class-names)
 - [API Reference](https://docs.uniwind.dev/api/use-uniwind)
 
+## 📦 Install Packages in Your Own Project
+
+You can consume `uniwind-router` and `uniwind-router-tools` directly from GitHub — no npm publish required. Both packages live as subdirectories inside this monorepo.
+
+### `uniwind-router` — Universal TanStack Router bridge
+
+```sh
+# pnpm
+pnpm add github:next-mmo/twind-universal#path:packages/uniwind-router
+
+# npm
+npm install next-mmo/twind-universal#path:packages/uniwind-router
+
+# yarn (Berry / v2+)
+yarn add github:next-mmo/twind-universal#path:packages/uniwind-router
+```
+
+Then import in your app:
+
+```ts
+// Web
+import { ... } from 'uniwind-router'
+import { ... } from 'uniwind-router/web'
+
+// React Native (Metro resolves the "react-native" export condition automatically)
+import { ... } from 'uniwind-router'
+import { ... } from 'uniwind-router/native'
+```
+
+**Peer dependencies** — install these alongside it:
+
+```sh
+pnpm add react@>=19 @tanstack/react-router
+
+# For native targets
+pnpm add react-native react-native-gesture-handler react-native-reanimated
+```
+
 ---
+
+### `uniwind-router-tools` — Route-tree watcher / generator CLI
+
+```sh
+# pnpm
+pnpm add -D github:next-mmo/twind-universal#path:packages/uniwind-router-tools
+
+# npm
+npm install --save-dev next-mmo/twind-universal#path:packages/uniwind-router-tools
+```
+
+Then add a script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "routes:watch": "uniwind-route-watch watch",
+    "routes:generate": "uniwind-route-watch generate"
+  }
+}
+```
+
+Create a `uniwind.routes.json` config at your project root (or pass flags inline):
+
+```json
+{
+  "targets": {
+    "web": {
+      "appRoot": ".",
+      "routesDirectory": "src/routes",
+      "generatedRouteTree": "src/routeTree.gen.ts"
+    },
+    "native": {
+      "appRoot": ".",
+      "routesDirectory": "src/routes",
+      "generatedRouteTree": "src/routeTree.native.gen.ts"
+    }
+  }
+}
+```
+
+> **Requirements:** Node ≥ 20, pnpm ≥ 8 / npm ≥ 7 / Yarn Berry for `#path:` subdirectory git installs.
+
+---
+
 
 ## useful links
 <!-- https://www.shadcnblocks.com/blocks -->
