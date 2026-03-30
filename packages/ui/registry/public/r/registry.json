@@ -70,6 +70,30 @@
                 }
             ],
             "docs": "Uses `Avatar`, `Button`, `UIText`, `Linking.openURL` for button URLs. Remote SVG hero images may need a raster `imageUrl` on some platforms."
+        },
+        {
+            "name": "animated-testimonials",
+            "type": "registry:block",
+            "title": "Animated testimonials",
+            "description": "Animated testimonials block for React Native and Uniwind.",
+            "categories": ["blocks", "marketing"],
+            "dependencies": ["lucide-react-native", "react-native-reanimated"],
+            "registryDependencies": [],
+            "files": [
+                {
+                    "path": "src/blocks/animated-testimonials/animated-testimonials-block.tsx",
+                    "type": "registry:component"
+                },
+                {
+                    "path": "src/blocks/animated-testimonials/index.ts",
+                    "type": "registry:lib"
+                },
+                {
+                    "path": "src/blocks/types.ts",
+                    "type": "registry:lib"
+                }
+            ],
+            "docs": "Uses `lucide-react-native` (ArrowLeft, ArrowRight) and `react-native-reanimated` (FadeInDown, useAnimatedStyle). Depends on `UIText`, `cn` helper."
         }
     ]
 }

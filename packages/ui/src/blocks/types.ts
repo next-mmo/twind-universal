@@ -64,3 +64,16 @@ export interface SurfaceGridBlockProps extends BlockChromeProps {
 
 export type { Hero3Props } from './marketing/hero3'
 export type { ShoppingCartBlockProps, ShoppingCartItem } from './shopping-cart/types'
+
+export interface Testimonial {
+    quote: string
+    name: string
+    designation: string
+    src: string
+}
+
+export interface AnimatedTestimonialsBlockProps {
+    testimonials: Testimonial[]
+    autoplay?: boolean
+    className?: string
+}

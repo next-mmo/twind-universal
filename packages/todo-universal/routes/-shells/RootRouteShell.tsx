@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import { Outlet, useRouter } from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, useRouter } from '@tanstack/react-router'
 import { Fragment, type ReactNode } from 'react'
 import { Platform } from 'react-native'
 import { TodoProvider } from '../-store/TodoContext'
@@ -23,9 +23,8 @@ function RootDocument({ children, shouldRenderDocumentShell }: Readonly<{ childr
         return <Fragment>{children}</Fragment>
     }
 
-    // Lazy-require web-only TanStack Router components to avoid
-    // loading DOM code on native (HeadContent renders <meta>, <title>, etc.)
-    const { HeadContent, Scripts } = require('@tanstack/react-router')
+    // Web-only TanStack Router components (HeadContent renders <meta>, <title>, etc.)
+    // They are only rendered on web, so it's safe to import them statically.
 
     return (
         <html>
